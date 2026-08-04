@@ -102,20 +102,13 @@ export default function Hero({ onOpenPaperModal }) {
   const handleSelectPlatform = (sampleHandle) => {
     setSearchQuery(sampleHandle);
     setIsDropdownOpen(false);
-    
-    const analyzer = document.getElementById('analyzer');
-    if (analyzer) {
-      analyzer.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.location.href = '/risk-report';
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setIsDropdownOpen(false);
-    const analyzer = document.getElementById('analyzer');
-    if (analyzer) {
-      analyzer.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.location.href = '/risk-report';
   };
 
   return (
@@ -144,7 +137,7 @@ export default function Hero({ onOpenPaperModal }) {
         <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-orange-950/80 text-orange-300 border border-orange-700/60 shadow-lg backdrop-blur-md">
             <Cpu className="w-3.5 h-3.5 text-orange-400" />
-            Computer Engineering Capstone
+           Computer Engineering 
           </span>
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold bg-orange-950/80 text-slate-100 border border-orange-700/60 shadow-lg backdrop-blur-md">
             Vidyalankar Institute of Technology
@@ -154,7 +147,7 @@ export default function Hero({ onOpenPaperModal }) {
         {/* Crisp White Title over Rich Dark Orange Background */}
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15] drop-shadow-md">
-            Cross-Platform Stylometric & Anonymity Audit
+            Cross-Platform Analysis & Anonymity Audit
           </h1>
           <p className="mt-4 text-base sm:text-lg text-orange-100/90 leading-relaxed max-w-2xl mx-auto font-medium">
             Search any username or handle to inspect cross-platform linkability risks across <strong className="text-white font-bold">GitHub, Reddit, Hacker News, and X</strong>.

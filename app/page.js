@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Workflow from '@/components/Workflow';
-import RiskReportCard from '@/components/RiskReportCard';
 import ResearchPaper from '@/components/ResearchPaper';
 import ResearchModal from '@/components/ResearchModal';
 import Footer from '@/components/Footer';
@@ -32,9 +31,6 @@ export default function Home() {
 
         {/* Workflow Section (Connect Account -> Analyze -> View Report) */}
         <Workflow />
-
-        {/* Functional Risk Report Preview Card & Interactive Demo */}
-        <RiskReportCard />
 
         {/* Dedicated Research Paper Section */}
         <ResearchPaper onOpenModal={handleOpenPaperModal} />

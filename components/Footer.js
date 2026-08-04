@@ -96,9 +96,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#analyzer" className="hover:text-orange transition-all flex items-center gap-1.5">
+                <a href="/risk-report" className="hover:text-orange transition-all flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5 text-brand-orange" />
-                  Risk Assessment Demo
+                  Risk Assessment Engine
                 </a>
               </li>
               <li>
