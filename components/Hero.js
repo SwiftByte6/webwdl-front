@@ -64,7 +64,7 @@ export default function Hero({ onOpenPaperModal }) {
     {
       id: 'reddit',
       name: 'Reddit',
-      sampleHandle: 'reddit.com/user/tech_wanderer',
+      sampleHandle: 'OriginalCountry4691',
       desc: 'Inspect comment frequency & subreddit vocabulary signatures',
       logo: RedditLogo,
       badge: 'Subreddit Stylometry',
@@ -102,13 +102,19 @@ export default function Hero({ onOpenPaperModal }) {
   const handleSelectPlatform = (sampleHandle) => {
     setSearchQuery(sampleHandle);
     setIsDropdownOpen(false);
-    window.location.href = '/risk-report';
+    if (sampleHandle) {
+      window.location.href = `/risk-report?handle=${encodeURIComponent(sampleHandle)}`;
+    }
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     setIsDropdownOpen(false);
-    window.location.href = '/risk-report';
+    if (searchQuery.trim()) {
+      window.location.href = `/risk-report?handle=${encodeURIComponent(searchQuery.trim())}`;
+    } else {
+      window.location.href = '/risk-report?handle=aarav_dev';
+    }
   };
 
   return (
