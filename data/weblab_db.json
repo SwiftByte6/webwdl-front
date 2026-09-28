@@ -1,0 +1,1814 @@
+{
+  "users": [
+    {
+      "id": "usr_demo_1",
+      "github_id": "12345678",
+      "github_username": "aarav_dev",
+      "reddit_username": "aarav_dev",
+      "name": "Aarav Sharma",
+      "email": "aarav.sharma.dev@gmail.com",
+      "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+      "created_at": "2026-09-28T18:32:53.219Z"
+    },
+    {
+      "id": "usr_current",
+      "github_id": "1790620869200",
+      "github_username": "SWIFTBYTE6",
+      "reddit_username": "Working_Low_6870",
+      "name": "@SWIFTBYTE6",
+      "email": "SwifTByte6@users.noreply.github.com",
+      "avatar_url": "https://github.com/SWIFTBYTE6.png",
+      "created_at": "2026-09-28T18:41:09.200Z"
+    }
+  ],
+  "github_data": [
+    {
+      "user_id": "usr_demo_1",
+      "username": "aarav_dev",
+      "name": "Aarav Sharma",
+      "bio": "Full Stack Systems Engineer @ CloudScale. Building distributed Rust & Next.js web applications.",
+      "location": "Bengaluru, India",
+      "company": "CloudScale Technologies",
+      "website": "https://aarav-sharma.dev",
+      "email": "aarav.sharma.dev@gmail.com",
+      "repos": [
+        {
+          "name": "cloud-orchestrator",
+          "language": "Rust",
+          "description": "Distributed async microservice orchestrator"
+        },
+        {
+          "name": "weblab-privacy",
+          "language": "JavaScript",
+          "description": "Privacy footprint auditor & OSINT scanner"
+        },
+        {
+          "name": "dotfiles",
+          "language": "Shell",
+          "description": "Neovim + tmux developer environment configuration"
+        }
+      ],
+      "events": [
+        {
+          "type": "PushEvent",
+          "repo": "weblab-privacy",
+          "commit_email": "aarav.sharma.dev@gmail.com",
+          "created_at": "2026-09-28T18:44:57.585Z"
+        },
+        {
+          "type": "IssueCommentEvent",
+          "repo": "rust-lang/rust",
+          "comment": "Fixed channel dispatcher deadlocks in async worker pool",
+          "permalink": "https://github.com/rust-lang/rust/issues/10482#issuecomment-991203"
+        }
+      ],
+      "updated_at": "2026-09-28T18:44:57.587Z"
+    },
+    {
+      "user_id": "usr_current",
+      "username": "SwiftByte6",
+      "name": "Rohit",
+      "bio": "Full-stack developer | MERN Stack | React, Node.js, Tailwind | C, Java, MySQL | Building real-world projects and leveling up every day.",
+      "location": "",
+      "company": "",
+      "website": "rohitportfolio06.netlify.app",
+      "email": "",
+      "repos": [
+        {
+          "name": "webwdl-front",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/webwdl-front",
+          "stargazers_count": 0
+        },
+        {
+          "name": "ajinkya",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/ajinkya",
+          "stargazers_count": 0
+        },
+        {
+          "name": "sih26",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/sih26",
+          "stargazers_count": 0
+        },
+        {
+          "name": "dummy",
+          "language": "HTML",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/dummy",
+          "stargazers_count": 0
+        },
+        {
+          "name": "wdl",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/wdl",
+          "stargazers_count": 0
+        },
+        {
+          "name": "vitspons",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/vitspons",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Ekotex",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Ekotex",
+          "stargazers_count": 1
+        },
+        {
+          "name": "faveadmin",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/faveadmin",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Fave",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Fave",
+          "stargazers_count": 0
+        },
+        {
+          "name": "azure-services",
+          "language": "Unknown",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/azure-services",
+          "stargazers_count": 0
+        },
+        {
+          "name": "cloud_exam_pratical",
+          "language": "Unknown",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/cloud_exam_pratical",
+          "stargazers_count": 0
+        },
+        {
+          "name": "neon-ledger",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/neon-ledger",
+          "stargazers_count": 0
+        },
+        {
+          "name": "CrytoHackathon",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/CrytoHackathon",
+          "stargazers_count": 0
+        },
+        {
+          "name": "DakshPortfolio",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/DakshPortfolio",
+          "stargazers_count": 0
+        },
+        {
+          "name": "TeamHopes",
+          "language": "Python",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/TeamHopes",
+          "stargazers_count": 0
+        },
+        {
+          "name": "PythonProject",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/PythonProject",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Room",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Room",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Os-project",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Os-project",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Facedetection",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Facedetection",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Sih2025",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Sih2025",
+          "stargazers_count": 1
+        },
+        {
+          "name": "plant",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/plant",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Becho",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Becho",
+          "stargazers_count": 0
+        },
+        {
+          "name": "cesa-hackathon2",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/cesa-hackathon2",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Bayside_Hackerz_Pb1",
+          "language": "Swift",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Bayside_Hackerz_Pb1",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Bayside",
+          "language": "Unknown",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Bayside",
+          "stargazers_count": 0
+        },
+        {
+          "name": "HackX",
+          "language": "JavaScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/HackX",
+          "stargazers_count": 0
+        },
+        {
+          "name": "loophackathon",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/loophackathon",
+          "stargazers_count": 0
+        },
+        {
+          "name": "Hackathon",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/Hackathon",
+          "stargazers_count": 0
+        },
+        {
+          "name": "drone",
+          "language": "TypeScript",
+          "description": "",
+          "html_url": "https://github.com/SwiftByte6/drone",
+          "stargazers_count": 0
+        },
+        {
+          "name": "bounty-creation-vzard",
+          "language": "TypeScript",
+          "description": "A fully functional, production-ready multi-step wizard built with Next.js App Router, React Hook Form, Zod, and shadcn/ui. It allows users to create a bounty through a structured 3-step flow with validation, preview, and final result display.",
+          "html_url": "https://github.com/SwiftByte6/bounty-creation-vzard",
+          "stargazers_count": 0
+        }
+      ],
+      "events": [
+        {
+          "type": "PushEvent",
+          "repo": "SwiftByte6/webwdl-front",
+          "created_at": "2026-09-20T15:37:47Z",
+          "comment": ""
+        },
+        {
+          "type": "PushEvent",
+          "repo": "SwiftByte6/webwdl-front",
+          "created_at": "2026-09-20T15:36:34Z",
+          "comment": ""
+        },
+        {
+          "type": "CreateEvent",
+          "repo": "SwiftByte6/ajinkya",
+          "created_at": "2026-09-20T10:34:26Z",
+          "comment": ""
+        },
+        {
+          "type": "PublicEvent",
+          "repo": "SwiftByte6/sih26",
+          "created_at": "2026-08-27T18:23:27Z",
+          "comment": ""
+        }
+      ],
+      "profile_url": "https://github.com/SwiftByte6",
+      "avatar_url": "https://avatars.githubusercontent.com/u/193304667?v=4",
+      "updated_at": "2026-09-28T18:49:12.979Z"
+    }
+  ],
+  "reddit_data": [
+    {
+      "user_id": "usr_demo_1",
+      "post_comment_id": "reddit_post_101",
+      "subreddit": "r/developersIndia",
+      "title": "Switched from Bengaluru to remote work at CloudScale",
+      "content": "Been working at CloudScale Technologies in Bengaluru for 3 years now. Drop your questions regarding system architecture.",
+      "url": "https://reddit.com/r/developersIndia/comments/x9012a/bengaluru_cloudscale_engineer",
+      "timestamp": 1789757097,
+      "created_at": "2026-09-28T18:44:57.592Z"
+    },
+    {
+      "user_id": "usr_demo_1",
+      "post_comment_id": "reddit_comment_102",
+      "subreddit": "r/rust",
+      "title": "Async channel dispatchers design",
+      "content": "Check out my github repo aarav-sharma.dev or drop me an email at aarav.sharma.dev [at] gmail [dot] com if you want to collaborate on rust orchestrator benchmark!",
+      "url": "https://reddit.com/r/rust/comments/z8821a/async_rust_benchmarks/c8812",
+      "timestamp": 1790189097,
+      "created_at": "2026-09-28T18:44:57.592Z"
+    },
+    {
+      "user_id": "usr_demo_1",
+      "post_comment_id": "reddit_comment_103",
+      "subreddit": "r/Neovim",
+      "title": "My Neovim config setup",
+      "content": "My dotfiles repository handles tmux and lua configs for neovim 0.10. I maintain it under aarav_dev handle on github.",
+      "url": "https://reddit.com/r/Neovim/comments/a1029/neovim_lua_setup/e99120",
+      "timestamp": 1790448297,
+      "created_at": "2026-09-28T18:44:57.592Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onl59qz",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "",
+      "content": "don't do that bro ,girls will come and go , don't just die because you don't have a gf bro",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1tm7oau/guys_i_dont_wanna_face_another_day/onl59qz/",
+      "timestamp": 1779622832,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onkvz0u",
+      "subreddit": "r/bollywoodmemes",
+      "title": "",
+      "content": "can be",
+      "url": "https://reddit.com/r/bollywoodmemes/comments/1tm1wdk/bro_had_us_until_the_last_answer/onkvz0u/",
+      "timestamp": 1779618454,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onku760",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "fr",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onku760/",
+      "timestamp": 1779617525,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onku6ig",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "hmm you are right man just focus on yourself",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onku6ig/",
+      "timestamp": 1779617516,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onku2g5",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "you got a point",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onku2g5/",
+      "timestamp": 1779617455,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onktvgz",
+      "subreddit": "r/twenties",
+      "title": "",
+      "content": "agreed",
+      "url": "https://reddit.com/r/twenties/comments/1tm2s41/settled_an_hourlong_debate_with_the_boys_today/onktvgz/",
+      "timestamp": 1779617352,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onktsk1",
+      "subreddit": "r/IndiaCricket",
+      "title": "",
+      "content": "i hope a team like KKR or some other franchise gets him and  he comebacks , cant see him under this much pressure from this mf goenka",
+      "url": "https://reddit.com/r/IndiaCricket/comments/1tm0uyp/tom_moody_on_rishabh_pant_when_it_comes_to_the/onktsk1/",
+      "timestamp": 1779617309,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onk2qpu",
+      "subreddit": "r/KolkataKnightRiders",
+      "title": "",
+      "content": "^(4. Manish Pandey)\n\n^(5. Yusuf Pathan)\n\n^(6. Kuldeep Yadav)\n\n^(7. brandon mcmullen)\n\n^(8. Chris Lynn)\n\n^(9. Brad Hogg)\n\n^(10. Mitchell Starc)",
+      "url": "https://reddit.com/r/KolkataKnightRiders/comments/1tityd6/blind_ranking_kkr_players/onk2qpu/",
+      "timestamp": 1779602799,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onk2q99",
+      "subreddit": "r/KolkataKnightRiders",
+      "title": "",
+      "content": "goat\n\n^(1. GG)\n\n^(2. Sunil Narine)\n\n^(3. Jacques Kallis)\n\n^(Similarity with Community: 83%)",
+      "url": "https://reddit.com/r/KolkataKnightRiders/comments/1tityd6/blind_ranking_kkr_players/onk2q99/",
+      "timestamp": 1779602793,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onk2axx",
+      "subreddit": "r/csk",
+      "title": "",
+      "content": "verdict is different than your selected players lol",
+      "url": "https://reddit.com/r/csk/comments/1tlkvnu/beyond_the_msd_era_tactical_changes_and_some/onk2axx/",
+      "timestamp": 1779602573,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onk0z3m",
+      "subreddit": "r/csk",
+      "title": "",
+      "content": "why the edit seems true now, Dhoni was dangerous and won trophies and brought glory to CSK, rutu has been learning  but due to injuries can't succeed ,  jadeja whose decision (trade) changed history",
+      "url": "https://reddit.com/r/csk/comments/1tljett/the_dragon_gonna_conquer_the_empire_soon_thala/onk0z3m/",
+      "timestamp": 1779601891,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onk0gp3",
+      "subreddit": "r/GATEtard",
+      "title": "",
+      "content": "bhai abhi prep start kar sakte ha kya ? 6th sem student here ",
+      "url": "https://reddit.com/r/GATEtard/comments/1tm23yl/2000_hours_ki_mehnat_got_all_iits_in_round_1_ask/onk0gp3/",
+      "timestamp": 1779601631,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjz2qf",
+      "subreddit": "r/ViratKohli",
+      "title": "",
+      "content": "Kohli is a good player, but he has to stop being a crybaby, although bhai at the end cricket h, sab log akhir me matter solve karlete ha apas me ",
+      "url": "https://reddit.com/r/ViratKohli/comments/1tl8ren/reddit_occupied_by_antikohli_people/onjz2qf/",
+      "timestamp": 1779600924,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjyqjs",
+      "subreddit": "r/bollywoodmemes",
+      "title": "",
+      "content": "\"Everybody owns him so much lol \"",
+      "url": "https://reddit.com/r/bollywoodmemes/comments/1tm1wdk/bro_had_us_until_the_last_answer/onjyqjs/",
+      "timestamp": 1779600750,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjye2b",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "kya kare kai log smajhte hi nahi ha",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjye2b/",
+      "timestamp": 1779600575,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjy79x",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "sahi kaha bhai",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjy79x/",
+      "timestamp": 1779600479,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjy2mv",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "you are right , should be average or more than average in every stat",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjy2mv/",
+      "timestamp": 1779600413,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxygd",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "yeah",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxygd/",
+      "timestamp": 1779600356,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxvhk",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "you can definitely have bro",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxvhk/",
+      "timestamp": 1779600315,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxo44",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "yep kuch jyada hi same log usi hairstyle ke sath dekhne lage ha",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxo44/",
+      "timestamp": 1779600213,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxkmr",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "bro i have seen many black skinned boys getting a 10 on 10 baddie",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxkmr/",
+      "timestamp": 1779600162,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxfu1",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "username checks",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxfu1/",
+      "timestamp": 1779600095,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxejb",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "thik thak",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxejb/",
+      "timestamp": 1779600077,
+      "created_at": "2026-09-28T18:49:15.157Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxdx4",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "facts",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxdx4/",
+      "timestamp": 1779600068,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjxcyr",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "baat sahi ha my mom also wants me to marry a bright skinned girl",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjxcyr/",
+      "timestamp": 1779600055,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjx983",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "communication skills and money  can get u a baddie faster than any acttractiveness",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjx983/",
+      "timestamp": 1779600004,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjx1vt",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "ap bhai wo to nahi ho , bisexual",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/onjx1vt/",
+      "timestamp": 1779599904,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjru2x",
+      "subreddit": "r/IndiaCricket",
+      "title": "",
+      "content": "well pant should leave this franchise rn, bro was crying, it was sad to see",
+      "url": "https://reddit.com/r/IndiaCricket/comments/1tm0uyp/tom_moody_on_rishabh_pant_when_it_comes_to_the/onjru2x/",
+      "timestamp": 1779597387,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjr2s0",
+      "subreddit": "r/CricketShitpost",
+      "title": "",
+      "content": "not deepak yaar",
+      "url": "https://reddit.com/r/CricketShitpost/comments/1tm1dmt/might_as_well_play_6_debutants/onjr2s0/",
+      "timestamp": 1779597028,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onjqmf6",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "",
+      "content": "fr bro whenever I say I am indian they immediatly ghost",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1ssq7yt/you_arent_going_to_find_a_girlfriend_here_bros/onjqmf6/",
+      "timestamp": 1779596811,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onerdka",
+      "subreddit": "r/delhicapitals",
+      "title": "",
+      "content": "lelo bhai\n\nhamare kisi kaam ka nahi ha ye waise bhi",
+      "url": "https://reddit.com/r/delhicapitals/comments/1tibj0x/how_about_fleming_as_the_dc_coach_next_season/onerdka/",
+      "timestamp": 1779534512,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onepwyc",
+      "subreddit": "r/BollyBlindsNGossip",
+      "title": "",
+      "content": "jalpari",
+      "url": "https://reddit.com/r/BollyBlindsNGossip/comments/1tlcujc/mouni_roy_glowing_at_cannes/onepwyc/",
+      "timestamp": 1779533820,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onebjo8",
+      "subreddit": "r/GetMotivatedBuddies",
+      "title": "",
+      "content": "dm me bro",
+      "url": "https://reddit.com/r/GetMotivatedBuddies/comments/1rw1lxe/20m_ist_looking_for_someone_to_study_at_night/onebjo8/",
+      "timestamp": 1779526158,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "onde2l9",
+      "subreddit": "r/Jabalpur",
+      "title": "",
+      "content": "why bro choose jabalpur for surrender",
+      "url": "https://reddit.com/r/Jabalpur/comments/1tl5n6g/the_bar_council_of_india_suspended_the_licence_of/onde2l9/",
+      "timestamp": 1779509156,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ondcexv",
+      "subreddit": "r/GetMotivatedBuddies",
+      "title": "",
+      "content": "lets connect",
+      "url": "https://reddit.com/r/GetMotivatedBuddies/comments/1r13k6s/20m_ist_seeking_a_study_partner_for_dsa_web/ondcexv/",
+      "timestamp": 1779508432,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ona39f8",
+      "subreddit": "r/IndianCricket",
+      "title": "",
+      "content": "good\n\n^(1. MS Dhoni)\n\n^(2. Virat Kohli)\n\n^(3. Gautam Gambhir)\n\n^(Similarity with Community: 82%)\n\n^(4. Sourav Ganguly)\n\n^(5. Rohit Sharma)\n\n^(6. Surya Kumar Yadav)",
+      "url": "https://reddit.com/r/IndianCricket/comments/1tke1cm/blind_rank_these_players_captaincy_skills_overall/ona39f8/",
+      "timestamp": 1779469870,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ona0fg1",
+      "subreddit": "r/webdevelopment",
+      "title": "",
+      "content": "very goood  project ",
+      "url": "https://reddit.com/r/webdevelopment/comments/1tkodgy/been_building_a_small_project_love_to_hear/ona0fg1/",
+      "timestamp": 1779469070,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "on6vbbw",
+      "subreddit": "r/IndianCricket",
+      "title": "",
+      "content": "you should trio i heared holy trinity hooda shanker tripathi",
+      "url": "https://reddit.com/r/IndianCricket/comments/1tk6rku/which_is_the_best_trio_according_to_u/on6vbbw/",
+      "timestamp": 1779425789,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "on11gaf",
+      "subreddit": "r/KolkataKnightRiders",
+      "title": "",
+      "content": "ok\n\n^(My choice: GG)",
+      "url": "https://reddit.com/r/KolkataKnightRiders/comments/1tijqwf/this_or_that/on11gaf/",
+      "timestamp": 1779357876,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "on08fg4",
+      "subreddit": "r/LucknowSuperGiant",
+      "title": "",
+      "content": "i want this staff\n\n^(Core, Untouchable: Head Coach, Fielding Coach, Analyst, Director of Cricket)\n\n^(Does not matter: Assistant Coach 2)\n\n^(Similarity with Community: 73%)",
+      "url": "https://reddit.com/r/LucknowSuperGiant/comments/1tjaeqo/lsgs_management_chaos_tier_list_who_stays_who/on08fg4/",
+      "timestamp": 1779342801,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "on08fgy",
+      "subreddit": "r/LucknowSuperGiant",
+      "title": "",
+      "content": "^(Core, Untouchable: Head Coach, Fielding Coach, Analyst, Director of Cricket)\n\n^(Adds Value, Keep: Strategic Advisor, Head of Medicine, Assistant Coach)\n\n^(Kick him out: Spin Bowling Coach, Fast Bowling coach, Captain)\n\n^(Does not matter: Assistant Coach 2)",
+      "url": "https://reddit.com/r/LucknowSuperGiant/comments/1tjaeqo/lsgs_management_chaos_tier_list_who_stays_who/on08fgy/",
+      "timestamp": 1779342801,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "on03p7o",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "i dont have job so idk",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/on03p7o/",
+      "timestamp": 1779340534,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omuc1or",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "nah it was cold at that time",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omuc1or/",
+      "timestamp": 1779274933,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omu0ybl",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "",
+      "content": "Thinking of making a web app or mobile app for this problem, are any developers out here?",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1ssq7yt/you_arent_going_to_find_a_girlfriend_here_bros/omu0ybl/",
+      "timestamp": 1779269755,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omparrf",
+      "subreddit": "r/AI_India",
+      "title": "",
+      "content": "yep andhbhakts are everywhere ",
+      "url": "https://reddit.com/r/AI_India/comments/1tglchn/_/omparrf/",
+      "timestamp": 1779209747,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omnjmdf",
+      "subreddit": "r/RemoteWorkers",
+      "title": "",
+      "content": "are all free ?  \n",
+      "url": "https://reddit.com/r/RemoteWorkers/comments/1tgsf7z/15_companies_hiring_remote_workers_for_nonphone/omnjmdf/",
+      "timestamp": 1779191069,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommvy9k",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "mujhe bhi koi lesbian dila do",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1thelxd/marriage_is_scarywhat_if_your_husband/ommvy9k/",
+      "timestamp": 1779179810,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommmhnc",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "bechara bhi khatam hogaya",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommmhnc/",
+      "timestamp": 1779174620,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommmf89",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "did it",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommmf89/",
+      "timestamp": 1779174585,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommmczi",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "thats what i did ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommmczi/",
+      "timestamp": 1779174553,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommm8ny",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "welcome man",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommm8ny/",
+      "timestamp": 1779174491,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommm7oj",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "done",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommm7oj/",
+      "timestamp": 1779174476,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlxu5",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "lol",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommlxu5/",
+      "timestamp": 1779174333,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlx6s",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "paijan",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommlx6s/",
+      "timestamp": 1779174323,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlw1f",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "thanks bro",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommlw1f/",
+      "timestamp": 1779174306,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlt9w",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "lol",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/ommlt9w/",
+      "timestamp": 1779174266,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlpum",
+      "subreddit": "r/KollyClub",
+      "title": "",
+      "content": "check my posts and stuff you can decide then , fyi i am from Mp",
+      "url": "https://reddit.com/r/KollyClub/comments/1tgm2rj/feel_free_to_debate_after_other_noise_pollutant/ommlpum/",
+      "timestamp": 1779174217,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "ommlc4n",
+      "subreddit": "r/AI_India",
+      "title": "",
+      "content": "when i said congress is good ?",
+      "url": "https://reddit.com/r/AI_India/comments/1tglchn/_/ommlc4n/",
+      "timestamp": 1779174019,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omml9fx",
+      "subreddit": "r/AI_India",
+      "title": "",
+      "content": "both party sucks in my opinion voted nota in previous election",
+      "url": "https://reddit.com/r/AI_India/comments/1tglchn/_/omml9fx/",
+      "timestamp": 1779173980,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omh8o7b",
+      "subreddit": "r/KollyClub",
+      "title": "",
+      "content": "as a person from north , hearing this track of sai , i was truly hyped and enjoyed it",
+      "url": "https://reddit.com/r/KollyClub/comments/1tgm2rj/feel_free_to_debate_after_other_noise_pollutant/omh8o7b/",
+      "timestamp": 1779110086,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omh7rbc",
+      "subreddit": "r/csk",
+      "title": "",
+      "content": "we used to think rcb  is tottenham but here we are",
+      "url": "https://reddit.com/r/csk/comments/1tf6b1v/our_situation_right_now/omh7rbc/",
+      "timestamp": 1779109791,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omh4gvn",
+      "subreddit": "r/IndianCinema",
+      "title": "",
+      "content": "okayish",
+      "url": "https://reddit.com/r/IndianCinema/comments/1tfpjrr/dc_official_trailer_lokesh_kanagaraj_sun_pictures/omh4gvn/",
+      "timestamp": 1779108716,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omh2qma",
+      "subreddit": "r/AI_India",
+      "title": "",
+      "content": "modi has made india beyond repair ",
+      "url": "https://reddit.com/r/AI_India/comments/1tglchn/_/omh2qma/",
+      "timestamp": 1779108129,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omh08xh",
+      "subreddit": "r/kollywood",
+      "title": "",
+      "content": "another karuppa ?\n\n",
+      "url": "https://reddit.com/r/kollywood/comments/1tgccmn/shoot_begins_today/omh08xh/",
+      "timestamp": 1779107250,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omgw1mg",
+      "subreddit": "r/Gujarat_Titans",
+      "title": "",
+      "content": "^(1. Srk vs ~~Prasidh~~)\n\n^(2. Srk vs ~~Rabada~~)\n\n^(3. Srk vs ~~Holder~~)\n\n^(4. Srk vs ~~Siraj~~)\n\n^(5. Srk vs ~~Ashok~~)\n\n^(6. Srk vs ~~Jayant~~)\n\n^(7. Srk vs ~~Ashish~~)\n\n^(8. Srk vs ~~Rashid~~)\n\n^(9. Srk vs ~~Sai Kishore~~)\n\n^(10. Srk vs ~~Sundar~~)\n\n^(11. Srk vs ~~Arshad~~)",
+      "url": "https://reddit.com/r/Gujarat_Titans/comments/1tgi76l/this_or_that_our_bowlers_2026/omgw1mg/",
+      "timestamp": 1779105708,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omgw14i",
+      "subreddit": "r/Gujarat_Titans",
+      "title": "",
+      "content": "^(1. Srk vs ~~Prasidh~~)\n\n^(2. Srk vs ~~Rabada~~)\n\n^(3. Srk vs ~~Holder~~)\n\n^(4. Srk vs ~~Siraj~~)\n\n^(5. Srk vs ~~Ashok~~)\n\n^(6. Srk vs ~~Jayant~~)\n\n^(7. Srk vs ~~Ashish~~)\n\n^(8. Srk vs ~~Rashid~~)\n\n^(9. Srk vs ~~Sai Kishore~~)\n\n^(10. Srk vs ~~Sundar~~)\n\n^(11. Srk vs ~~Arshad~~)",
+      "url": "https://reddit.com/r/Gujarat_Titans/comments/1tgi76l/this_or_that_our_bowlers_2026/omgw14i/",
+      "timestamp": 1779105703,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omgw0nf",
+      "subreddit": "r/Gujarat_Titans",
+      "title": "",
+      "content": "srk is goat\n\n^(Champion: Srk)",
+      "url": "https://reddit.com/r/Gujarat_Titans/comments/1tgi76l/this_or_that_our_bowlers_2026/omgw0nf/",
+      "timestamp": 1779105698,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omgrk9i",
+      "subreddit": "r/IndianHipHopHeads",
+      "title": "",
+      "content": "koihh is the one of the best dhh tracks ever made in my opinion",
+      "url": "https://reddit.com/r/IndianHipHopHeads/comments/1tfvlwc/which_ihh_tracks_felt_beyond_music/omgrk9i/",
+      "timestamp": 1779103940,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omg8an5",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "mossad  spying on me thats intresting but what secret i have",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omg8an5/",
+      "timestamp": 1779094504,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omg7ynj",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "kuch to gadbad ha daya\n\n",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omg7ynj/",
+      "timestamp": 1779094321,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omf4hq9",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "",
+      "content": "why tho",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1ssq7yt/you_arent_going_to_find_a_girlfriend_here_bros/omf4hq9/",
+      "timestamp": 1779074497,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omen5y9",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "already buried",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omen5y9/",
+      "timestamp": 1779067760,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omen3ck",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "he did for your sins ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omen3ck/",
+      "timestamp": 1779067732,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omen0hn",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "so what to do next",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omen0hn/",
+      "timestamp": 1779067702,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemyxj",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "matlab kaisa bro",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemyxj/",
+      "timestamp": 1779067684,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemwsr",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "id did ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemwsr/",
+      "timestamp": 1779067663,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemuh5",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "by that crow yeah maybe",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemuh5/",
+      "timestamp": 1779067638,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemrx8",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "kuch bhi",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemrx8/",
+      "timestamp": 1779067611,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemnyy",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "now even a pigeon can't handle my situation ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemnyy/",
+      "timestamp": 1779067569,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omeml9l",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "isko bulana tha yaar",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omeml9l/",
+      "timestamp": 1779067541,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemiwn",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "it was dyhyradrated maybe ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemiwn/",
+      "timestamp": 1779067516,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omemexw",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "no, but the room owner now works in wb",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemexw/",
+      "timestamp": 1779067474,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omembgs",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "that's people always have to",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omembgs/",
+      "timestamp": 1779067438,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omem93w",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "what's that",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omem93w/",
+      "timestamp": 1779067413,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omem75v",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "buryvkardiya hoagya",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omem75v/",
+      "timestamp": 1779067393,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omem4tb",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "cat already did the required ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omem4tb/",
+      "timestamp": 1779067368,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omem177",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "he had just a bitcoin what should I do",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omem177/",
+      "timestamp": 1779067330,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelyj6",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "bro died for our sins",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelyj6/",
+      "timestamp": 1779067301,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelvxm",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "buried",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelvxm/",
+      "timestamp": 1779067274,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelu37",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "never in my life I would think to do that",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelu37/",
+      "timestamp": 1779067254,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelqtm",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "marne ke baad kaise puchta",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelqtm/",
+      "timestamp": 1779067220,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelmy3",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "bekar duniya bekar log hote ha",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelmy3/",
+      "timestamp": 1779067180,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omeliph",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "yep",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omeliph/",
+      "timestamp": 1779067136,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelgxr",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "that's bad",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelgxr/",
+      "timestamp": 1779067117,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelff4",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "did that",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelff4/",
+      "timestamp": 1779067101,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omelciz",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "it is not necessary I guess as burning someone even tho it's dead just not fits with me ,so I buried him",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omelciz/",
+      "timestamp": 1779067071,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omel5pr",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "i buried it near a garden ",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omel5pr/",
+      "timestamp": 1779066997,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omel255",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "Lol",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omel255/",
+      "timestamp": 1779066960,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omehiig",
+      "subreddit": "r/MadhyaPradesh",
+      "title": "",
+      "content": "29 dec",
+      "url": "https://reddit.com/r/MadhyaPradesh/comments/1tfv1by/lets_find_people_with_same_birthdate/omehiig/",
+      "timestamp": 1779065654,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "omaxs00",
+      "subreddit": "r/TwentiesIndia",
+      "title": "",
+      "content": "maybe ,par itna bura nahi. dekhta lol",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omaxs00/",
+      "timestamp": 1779024406,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tm2s41",
+      "subreddit": "r/twenties",
+      "title": "Settled an hour-long debate with the boys today: Facial structure > everything else.",
+      "content": "Settled an hour-long debate with the boys today: Facial structure > everything else.\nWe genuinely lost track of time arguing about what actually defines attractiveness. We finally concluded that bone structure and facial symmetry make a person more attractive, making skin color irrelevant. Are we spitting facts, or do we need to touch grass?\nhttps://i.redd.it/m8i9eeo7r03h1.png",
+      "url": "https://reddit.com/r/twenties/comments/1tm2s41/settled_an_hourlong_debate_with_the_boys_today/",
+      "timestamp": 1779599604,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tm2qgm",
+      "subreddit": "r/TwentiesIndia",
+      "title": "Settled an hour-long debate with the boys today: Facial structure > everything else.",
+      "content": "Settled an hour-long debate with the boys today: Facial structure > everything else.\nWe genuinely lost track of time arguing about what actually defines attractiveness. We finally concluded that bone structure and facial symmetry makes a person more attractive, making skin color irrelevant. Are we spitting facts or do we need to touch grass?\nhttps://i.redd.it/6iehaqlgq03h1.png",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tm2qgm/settled_an_hourlong_debate_with_the_boys_today/",
+      "timestamp": 1779599460,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tlksym",
+      "subreddit": "r/phonesex",
+      "title": "21[m] any indian here who can talk to me for while",
+      "content": "21[m] any indian here who can talk to me for while\ni am bored need someone who can talk to me and i can sleep with him talking\nhttps://www.reddit.com/r/phonesex/comments/1tlksym/21m_any_indian_here_who_can_talk_to_me_for_while/",
+      "url": "https://reddit.com/r/phonesex/comments/1tlksym/21m_any_indian_here_who_can_talk_to_me_for_while/",
+      "timestamp": 1779553091,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tk7uat",
+      "subreddit": "r/NoFap",
+      "title": "after 7 days i again masturabted 😭",
+      "content": "after 7 days i again masturabted 😭\ni was feeling uneasy and couldn't control my urge and masturbated watching porn , can someone help me bro i am 20 and still cant control this habit.\nhttps://www.reddit.com/r/NoFap/comments/1tk7uat/after_7_days_i_again_masturabted/",
+      "url": "https://reddit.com/r/NoFap/comments/1tk7uat/after_7_days_i_again_masturabted/",
+      "timestamp": 1779422957,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tjdqa5",
+      "subreddit": "r/Needafriend",
+      "title": "anyone up for a chat ?",
+      "content": "anyone up for a chat ?\njust bored at this heat i need someone to talk to. I am  20m from India btw .\nhttps://www.reddit.com/r/Needafriend/comments/1tjdqa5/anyone_up_for_a_chat/",
+      "url": "https://reddit.com/r/Needafriend/comments/1tjdqa5/anyone_up_for_a_chat/",
+      "timestamp": 1779350646,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tj2ik7",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "20m searching for a friend and a phone call(from India)",
+      "content": "20m searching for a friend and a phone call(from India)\nI am student in computer sciences,can do conversation in anything I got and can do debates as well please dm me\nhttps://www.reddit.com/r/MakeNewFriendsHere/comments/1tj2ik7/20m_searching_for_a_friend_and_a_phone_callfrom/",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1tj2ik7/20m_searching_for_a_friend_and_a_phone_callfrom/",
+      "timestamp": 1779318975,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tijidu",
+      "subreddit": "r/videoeditingindia",
+      "title": "[Hiring ]looking for a short term video editor for my yt channel",
+      "content": "[Hiring ]looking for a short term video editor for my yt channel\nHey everyone,\nI am looking for a consistent video editor for my YouTube channel to create and deliver daily Shorts/Reels.\nRequirements:\nMust have a solid knowledge of The Big 3 (One Piece, Naruto, Bleach) and the Naruto universe. You need to understand the lore to edit the content correctly.\nBasic to decent video editing skills (clean cuts, text/captions, sync with audio).\nAbility to maintain a daily schedule.\n\n\nHow to Apply:\nIf you are interested, please DM me your portfolio or some sample work. Please don't just send a simple \"Hey\"—include your work so we can take things forward quickly.\n\nAdditional Requirements:\n\n- Realistic AI voice-over\n- Engaging editing with smooth transitions\n- Sound effects (SFX)\n- High-quality visuals and subtitles\n\nReference videos:\n\n- https://youtube.com/shorts/Vhwd30vL74I\n- https://youtube.com/shorts/b90O7VIl594\n- https://youtube.com/shorts/C6pTUb9DwTU\nhttps://www.reddit.com/r/videoeditingindia/comments/1tijidu/hiring_looking_for_a_short_term_video_editor_for/",
+      "url": "https://reddit.com/r/videoeditingindia/comments/1tijidu/hiring_looking_for_a_short_term_video_editor_for/",
+      "timestamp": 1779278417,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tii8s7",
+      "subreddit": "r/CreatorServices",
+      "title": "[Hiring] Looking for a Short-Form Video Editor for an Anime YouTube Channel (Daily Content)",
+      "content": "[Hiring] Looking for a Short-Form Video Editor for an Anime YouTube Channel (Daily Content)\nHey everyone,\n\nI am looking for a consistent video editor for my YouTube channel to create and deliver daily Shorts/Reels.\n\n**Requirements:**\n\n* Must have a solid knowledge of **The Big 3 (One Piece, Naruto, Bleach)** and the **Naruto** universe. You need to understand the lore to edit the content correctly.\n* Basic to decent video editing skills (clean cuts, text/captions, sync with audio).\n* Ability to maintain a daily schedule.\n\nThis is a great opportunity for beginners looking to build up their portfolio, get consistent work, and work on something they actually like (Anime).\n\n**How to Apply:** If you are interested, please **DM me your portfolio or some sample work**. Please don't just send a simple \"Hey\"—include your work so we can take things forward quickly!\nhttps://www.reddit.com/r/CreatorServices/comments/1tii8s7/hiring_looking_for_a_shortform_video_editor_for/",
+      "url": "https://reddit.com/r/CreatorServices/comments/1tii8s7/hiring_looking_for_a_shortform_video_editor_for/",
+      "timestamp": 1779274888,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tii6d1",
+      "subreddit": "r/FreelanceIndia",
+      "title": "[Hiring] Looking for a Short-Form Video Editor for an Anime YouTube Channel (Daily Content)",
+      "content": "[Hiring] Looking for a Short-Form Video Editor for an Anime YouTube Channel (Daily Content)\nHey everyone,\n\nI am looking for a consistent video editor for my YouTube channel to create and deliver daily Shorts/Reels.\n\n**Requirements:**\n\n* Must have a solid knowledge of **The Big 3 (One Piece, Naruto, Bleach)** and the **Naruto** universe. You need to understand the lore to edit the content correctly.\n* Basic to decent video editing skills (clean cuts, text/captions, sync with audio).\n* Ability to maintain a daily schedule.\n\nThis is a great opportunity for beginners looking to build up their portfolio, get consistent work, and work on something they actually like (Anime).\n\n**How to Apply:** If you are interested, please **DM me your portfolio or some sample work**. Please don't just send a simple \"Hey\"=>include your work so we can take things forward quickly!\nhttps://www.reddit.com/r/FreelanceIndia/comments/1tii6d1/hiring_looking_for_a_shortform_video_editor_for/",
+      "url": "https://reddit.com/r/FreelanceIndia/comments/1tii6d1/hiring_looking_for_a_shortform_video_editor_for/",
+      "timestamp": 1779274712,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tfosnx",
+      "subreddit": "r/TwentiesIndia",
+      "title": "What to do this pigeon just died in front of my room ?",
+      "content": "What to do this pigeon just died in front of my room ?\nI was sleeping and then was going to bathroom and noticed this just now. Rip pigeon don't know who did this , bhai ye kahi toy to nahi ha\nhttps://www.reddit.com/gallery/1tfosnx",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/",
+      "timestamp": 1779022581,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1tcra80",
+      "subreddit": "r/csk",
+      "title": "csk won 6 matches and 6 players are ruled out so far. if 7th won then ?(thala coming)",
+      "content": "csk won 6 matches and 6 players are ruled out so far. if 7th won then ?(thala coming)\n[removed]\nhttps://i.redd.it/2zfdcukm621h1.png",
+      "url": "https://reddit.com/r/csk/comments/1tcra80/csk_won_6_matches_and_6_players_are_ruled_out_so/",
+      "timestamp": 1778745229,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t86p1i",
+      "subreddit": "r/TwentiesIndia",
+      "title": "Do tomboys like this exist in India?",
+      "content": "Do tomboys like this exist in India?\n**I haven't seen this type(muscular ones) of tomboy in my area, so I wanted to know some people like this to confirm this. I also have quite a liking for them.**\n\n# \nhttps://i.redd.it/sx1dz0v2h40h1.png",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1t86p1i/do_tomboys_like_this_exist_in_india/",
+      "timestamp": 1778337365,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t8588t",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "20 m India need someone who i can share memes and play games with",
+      "content": "20 m India need someone who i can share memes and play games with\nI am from India and currently studying engineering. I am looking for someone who can build a consistent connection with me—>someone who sends memes and doesn't disappear if I don't reply for a day or two. Anyone is welcome to reach out.maybe it can become a real connection i nfuture\nhttps://www.reddit.com/r/MakeNewFriendsHere/comments/1t8588t/20_m_india_need_someone_who_i_can_share_memes_and/",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1t8588t/20_m_india_need_someone_who_i_can_share_memes_and/",
+      "timestamp": 1778333772,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t7kgpu",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "20m looking for a  call and a friend",
+      "content": "20m looking for a  call and a friend\ni am looking for someone who can call me rn and talk stuff , i am from india 20 year old a engineering student please reply & dm if you okay with this\nhttps://www.reddit.com/r/MakeNewFriendsHere/comments/1t7kgpu/20m_looking_for_a_call_and_a_friend/",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1t7kgpu/20m_looking_for_a_call_and_a_friend/",
+      "timestamp": 1778273862,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t7ke3t",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "20m looking for a sleep call and a friend",
+      "content": "20m looking for a sleep call and a friend\n[removed]\nhttps://www.reddit.com/r/MakeNewFriendsHere/comments/1t7ke3t/20m_looking_for_a_sleep_call_and_a_friend/",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1t7ke3t/20m_looking_for_a_sleep_call_and_a_friend/",
+      "timestamp": 1778273695,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t3qieg",
+      "subreddit": "r/TwentiesIndia",
+      "title": "Can you solve this light bulb problem ?",
+      "content": "Can you solve this light bulb problem ?\n**The Scenario:** You are standing in a room with three light switches. Each switch controls one of three light bulbs located in another room (or outside). You cannot see the bulbs from the room with the switches.\n\n**The Rules:**\n\n1. All three bulbs are currently **OFF**.\n2. You may flip the switches however you like and leave them in any position.\n3. You can only enter the room with the bulbs **once**.\n4. Once you leave the switch room and go to the bulbs, you cannot go back to change the switches.\n\n**The Goal:** How do you determine, with 100% certainty, which switch belongs to which bulb?\nhttps://i.redd.it/6w60yroi06zg1.png",
+      "url": "https://reddit.com/r/TwentiesIndia/comments/1t3qieg/can_you_solve_this_light_bulb_problem/",
+      "timestamp": 1777919890,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1t2c0q7",
+      "subreddit": "r/MakeNewFriendsHere",
+      "title": "Someone wanna prove me  wrong  after my last post here",
+      "content": "Someone wanna prove me  wrong  after my last post here\nA bro replied  to me in dm after my last post on this sub about not getting friends\n\n[https://www.reddit.com/r/MakeNewFriendsHere/comments/1ssq7yt/you\\_arent\\_going\\_to\\_find\\_a\\_girlfriend\\_here\\_bros/?utm\\_source=share&utm\\_medium=web3x&utm\\_name=web3xcss&utm\\_term=1&utm\\_content=share\\_button](https://www.reddit.com/r/MakeNewFriendsHere/comments/1ssq7yt/you_arent_going_to_find_a_girlfriend_here_bros/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)\n\nusername : sjwiwifuf738282\n\n  \nHey i saw your post about how no one can find their girlfriend on the makefriends subreddit. I call BS!!! I'll prove it! I'll get a gf on there and she will be perfect!!! I don't even care if its a old dude pretending. As long as he is a good ACTOR what's the difference?! Honestly id kinda prefer it if its a guy because DUDES get each other. We understand each other. Not like women who always talk about shopping, etc. Not all women (obviously) im a feminist after all. And women go through enough as it is. And yes I AM THE guy who would let a woman cry on my shoulder with zero expectations. As I said I am a feminist, I would date a guy pretending to be a girl online and I'll prove it to yoi\n\n  \nI wanna just say to him :\n\nHey man, if you’re down to date a 'good actor' regardless of who is behind the screen, more power to you. Hope you find exactly what you're looking for in this sub.\nhttps://www.reddit.com/r/MakeNewFriendsHere/comments/1t2c0q7/someone_wanna_prove_me_wrong_after_my_last_post/",
+      "url": "https://reddit.com/r/MakeNewFriendsHere/comments/1t2c0q7/someone_wanna_prove_me_wrong_after_my_last_post/",
+      "timestamp": 1777784380,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1sy5xgq",
+      "subreddit": "r/IndiaSextingConnect",
+      "title": "20m girls comment or dm me your kinks and fantasies",
+      "content": "20m girls comment or dm me your kinks and fantasies\ni am open to rp , fantasy and many more just dm\nhttps://www.reddit.com/r/IndiaSextingConnect/comments/1sy5xgq/20m_girls_comment_or_dm_me_your_kinks_and/",
+      "url": "https://reddit.com/r/IndiaSextingConnect/comments/1sy5xgq/20m_girls_comment_or_dm_me_your_kinks_and/",
+      "timestamp": 1777392709,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1sxi88k",
+      "subreddit": "r/IndiaSextingConnect",
+      "title": "M4F  20M looking for hotties & also into older woman than my age",
+      "content": "M4F  20M looking for hotties & also into older woman than my age\nNeed someone for sexting and do a call or chats\nhttps://www.reddit.com/r/IndiaSextingConnect/comments/1sxi88k/m4f_20m_looking_for_hotties_also_into_older_woman/",
+      "url": "https://reddit.com/r/IndiaSextingConnect/comments/1sxi88k/m4f_20m_looking_for_hotties_also_into_older_woman/",
+      "timestamp": 1777327281,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1swi2cd",
+      "subreddit": "r/ipl",
+      "title": "What match is this going on at 1:31 am , google got a glitch but mi still losing",
+      "content": "What match is this going on at 1:31 am , google got a glitch but mi still losing\nJust saw a notification on Google it said mi won the toss ,I thought what is happening it's 1am not even on.Then I saw mi is losing here too ,I think ambani getting a fight from Google in this alternate universe too. Why the match is 11 over only .\nhttps://i.redd.it/qdfwgjoaclxg1.png",
+      "url": "https://reddit.com/r/ipl/comments/1swi2cd/what_match_is_this_going_on_at_131_am_google_got/",
+      "timestamp": 1777233977,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1swfpz7",
+      "subreddit": "r/Gyangangacollege",
+      "title": "best places in this college according to you?",
+      "content": "best places in this college according to you?\nhttps://www.reddit.com/r/Gyangangacollege/comments/1swfpz7/best_places_in_this_college_according_to_you/",
+      "url": "https://reddit.com/r/Gyangangacollege/comments/1swfpz7/best_places_in_this_college_according_to_you/",
+      "timestamp": 1777228756,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1swforw",
+      "subreddit": "r/Gyangangacollege",
+      "title": "what do you think about this College ?",
+      "content": "what do you think about this College ?\nStudents from GGITS and GGCT, what do you think about the environment of both colleges?\nhttps://i.redd.it/c4fnr755xkxg1.jpeg",
+      "url": "https://reddit.com/r/Gyangangacollege/comments/1swforw/what_do_you_think_about_this_college/",
+      "timestamp": 1777228682,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1swcs3y",
+      "subreddit": "r/Gyangangacollege",
+      "title": "Best place to hang out near campus ?",
+      "content": "Best place to hang out near campus ?\nSince the weather is getting \\[Hot/Rainy\\], where is everyone heading these days?\n\n\nhttps://www.reddit.com/r/Gyangangacollege/comments/1swcs3y/best_place_to_hang_out_near_campus/",
+      "url": "https://reddit.com/r/Gyangangacollege/comments/1swcs3y/best_place_to_hang_out_near_campus/",
+      "timestamp": 1777222254,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1sw9psc",
+      "subreddit": "r/Gyangangacollege",
+      "title": "🚨 5th Sem Results Official Discussion Thread! How'd we do?",
+      "content": "🚨 5th Sem Results Official Discussion Thread! How'd we do?\nThe portal is finally live—**5th Semester results are out!** Check your results here:[Result](https://result.rgpv.ac.in/result/BErslt.aspx)\n\nThis was a heavy semester for many of us, and now that the marks are on paper, let's talk about it.\n\n# The Breakdown:\n\n* **How’s the SGPA looking?** Did the checking go as expected, or did the university pull a fast one on us?\n* **The \"Killer\" Subject:** Which subject ended up being the GPA destroyer this time? (Was it Analysis of Algorithms or something else?)\n* **Placement Prep:** For those of us eyeing those 7th-sem companies, how are we feeling about our aggregate now?\n\n# Got a Back? Don't Panic.\n\nIf you didn't get the result you wanted or ended up with a back, don't sweat it. Use this thread to ask about:\n\n* **Challenge/Revaluation:** How to apply and if it’s worth the fee.\n* **Resources:** If you need to clear a subject in the next attempt, ask for notes or senior advice here.\n\n**Keep the comments civil—vent about the checking if you have to, but no personal attacks on faculty. Good luck everyone!** 👇\nhttps://i.redd.it/82tecsqhtjxg1.png",
+      "url": "https://reddit.com/r/Gyangangacollege/comments/1sw9psc/5th_sem_results_official_discussion_thread_howd/",
+      "timestamp": 1777215373,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    },
+    {
+      "user_id": "usr_current",
+      "post_comment_id": "1sw9lfs",
+      "subreddit": "r/Gyangangacollege",
+      "title": "👋 Welcome to r/Gyangangacollege - Introduce Yourself and Read First!",
+      "content": "👋 Welcome to r/Gyangangacollege - Introduce Yourself and Read First!\nHey everyone! I'm u/Working_Low_6870, a founding moderator of r/Gyangangacollege.\n\nThis is our new digital campus—a home for all students and alumni to connect, vent, and help each other out. We're excited to have you join the very first wave!\n\n# What to Post\n\nDon't overthink it. If it’s happening at Gyan Ganga, it belongs here:\n\n* **Daily Campus Life:** Shared a funny incident in the canteen? Saw something weird in the parking lot? Post it.\n* **Academic & Exams:** Rant about the tough papers, share your prep notes, or ask for help with that one lab manual you can't finish.\n* **College Queries:** Confused about scholarship forms, bus timings, or fee submissions? Ask the community.\n* **Lost & Found:** Whether you lost your ID card or found a stray calculator, post it here so we can get it back to the owner.\n* **Need Something?** Looking for a specific textbook, a teammate for a hackathon, or someone to practice chess with? Just ask.\n\n# Community Vibe\n\nWe’re all about being friendly and constructive (with a healthy dose of humor). Let’s build a space where we can speak freely about college life while keeping it helpful for everyone.\n\n# How to Get Started\n\n1. **Introduce yourself** in the comments below (Year/Branch/Interests).\n2. **Post something today!** Even a simple question about tomorrow’s schedule can spark a conversation.\n3. **Spread the word:** If you know a classmate who needs to be here, invite them.\n4. **Join the Mod Team:** Interested in helping me run this place? Reach out via DM to apply.\n\nThanks for being part of the beginning. Let's make r/Gyangangacollege the go-to spot for every student.\n\n**—** u/Working_Low_6870\nhttps://www.reddit.com/r/Gyangangacollege/comments/1sw9lfs/welcome_to_rgyangangacollege_introduce_yourself/",
+      "url": "https://reddit.com/r/Gyangangacollege/comments/1sw9lfs/welcome_to_rgyangangacollege_introduce_yourself/",
+      "timestamp": 1777215086,
+      "created_at": "2026-09-28T18:49:15.158Z"
+    }
+  ],
+  "exposure_findings": [
+    {
+      "id": "finding_usr_demo_1_1",
+      "user_id": "usr_demo_1",
+      "type": "Contact Exposure",
+      "value": "aarav.sharma.dev@gmail.com",
+      "severity": "High",
+      "source": "GitHub Profile",
+      "evidence_url": "https://github.com/aarav_dev",
+      "confidence": 98,
+      "description": "Public contact email address exposed in GitHub profile fields.",
+      "remediation": "Consider toggling \"Keep my email addresses private\" in GitHub account settings."
+    },
+    {
+      "id": "finding_usr_demo_1_2",
+      "user_id": "usr_demo_1",
+      "type": "Location Exposure",
+      "value": "Bengaluru, India",
+      "severity": "Moderate",
+      "source": "GitHub Profile",
+      "evidence_url": "https://github.com/aarav_dev",
+      "confidence": 90,
+      "description": "Specific city/region location disclosed publicly on developer profile.",
+      "remediation": "Clear or generalize the location field in your public profile settings."
+    },
+    {
+      "id": "finding_usr_demo_1_3",
+      "user_id": "usr_demo_1",
+      "type": "Identity Exposure",
+      "value": "CloudScale Technologies",
+      "severity": "Moderate",
+      "source": "GitHub Profile",
+      "evidence_url": "https://github.com/aarav_dev",
+      "confidence": 92,
+      "description": "Employer or organization affiliation disclosed on profile.",
+      "remediation": "Remove current employer affiliation from public bio if aiming for pseudonymity."
+    },
+    {
+      "id": "finding_usr_demo_1_4",
+      "user_id": "usr_demo_1",
+      "type": "Identity Exposure",
+      "value": "https://aarav-sharma.dev",
+      "severity": "Moderate",
+      "source": "GitHub Profile",
+      "evidence_url": "https://github.com/aarav_dev",
+      "confidence": 95,
+      "description": "Personal domain or blog URL cross-linked on public profile.",
+      "remediation": "Ensure personal website domain WHOIS privacy is active and does not list personal contact info."
+    },
+    {
+      "id": "finding_usr_demo_1_5",
+      "user_id": "usr_demo_1",
+      "type": "Location Exposure",
+      "value": "BENGALURU",
+      "severity": "Moderate",
+      "source": "Reddit (r/developersIndia)",
+      "evidence_url": "https://reddit.com/r/developersIndia/comments/x9012a/bengaluru_cloudscale_engineer",
+      "confidence": 85,
+      "description": "Reference to geographic region (bengaluru) in community discussions.",
+      "remediation": "Avoid citing specific cities or local regional subreddits when using pseudonymous handles."
+    },
+    {
+      "id": "finding_usr_demo_1_6",
+      "user_id": "usr_demo_1",
+      "type": "Contact Exposure",
+      "value": "aarav.sharma.dev@gmail.com",
+      "severity": "High",
+      "source": "Reddit (r/rust)",
+      "evidence_url": "https://reddit.com/r/rust/comments/z8821a/async_rust_benchmarks/c8812",
+      "confidence": 96,
+      "description": "Obfuscated or plain-text email address discovered in public Reddit comment.",
+      "remediation": "Edit or delete old Reddit comments containing personal email addresses."
+    },
+    {
+      "id": "finding_usr_current_1",
+      "user_id": "usr_current",
+      "type": "Identity Exposure",
+      "value": "rohitportfolio06.netlify.app",
+      "severity": "Moderate",
+      "source": "GitHub Profile",
+      "evidence_url": "https://github.com/SwiftByte6",
+      "confidence": 95,
+      "description": "Personal domain or blog URL cross-linked on public profile.",
+      "remediation": "Ensure personal website domain WHOIS privacy is active and does not list personal contact info."
+    },
+    {
+      "id": "finding_usr_current_2",
+      "user_id": "usr_current",
+      "type": "Cross-platform Linkage",
+      "value": "reddit: @r",
+      "severity": "High",
+      "source": "Reddit (post)",
+      "evidence_url": "https://reddit.com/r/phonesex/comments/1tlksym/21m_any_indian_here_who_can_talk_to_me_for_while/",
+      "confidence": 92,
+      "description": "Direct reference or hyperlink to external platform handle (@r).",
+      "remediation": "Avoid cross-linking handles across platforms if maintaining pseudonymity."
+    },
+    {
+      "id": "finding_usr_current_3",
+      "user_id": "usr_current",
+      "type": "Cross-platform Linkage",
+      "value": "reddit: @gallery",
+      "severity": "High",
+      "source": "Reddit (post)",
+      "evidence_url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/",
+      "confidence": 92,
+      "description": "Direct reference or hyperlink to external platform handle (@gallery).",
+      "remediation": "Avoid cross-linking handles across platforms if maintaining pseudonymity."
+    }
+  ],
+  "identity_links": [
+    {
+      "id": "link_usr_demo_1_1",
+      "user_id": "usr_demo_1",
+      "source_a": "GitHub (@aarav_dev)",
+      "source_b": "Reddit (u/aarav_dev)",
+      "signal": "Exact Username Match",
+      "confidence": "High",
+      "evidence": "Both accounts share the exact pseudonym handle \"aarav_dev\".",
+      "evidence_url": "https://github.com/aarav_dev",
+      "supporting_signals": [
+        "Reused pseudonym across technical communities",
+        "Single entity namespace"
+      ]
+    },
+    {
+      "id": "link_usr_demo_1_2",
+      "user_id": "usr_demo_1",
+      "source_a": "GitHub Commit / Profile Email",
+      "source_b": "Reddit Comment Disclosure",
+      "signal": "Direct Linkage: Shared Un-mangled Email Address",
+      "confidence": "High",
+      "evidence": "Exact email match (aarav.sharma.dev@gmail.com) found in GitHub profile/commit headers and Reddit comment thread.",
+      "evidence_url": "https://github.com/aarav_dev",
+      "supporting_signals": [
+        "Unique personal email identifier",
+        "Proof of single entity ownership"
+      ]
+    },
+    {
+      "id": "link_usr_demo_1_3",
+      "user_id": "usr_demo_1",
+      "source_a": "GitHub Location Field",
+      "source_b": "Reddit Post Content",
+      "signal": "Supporting Signal: Matching Geographic Location",
+      "confidence": "Medium",
+      "evidence": "GitHub profile declares \"Bengaluru, India\" and Reddit activity discusses \"BENGALURU\".",
+      "evidence_url": "https://reddit.com/r/developersIndia/comments/x9012a/bengaluru_cloudscale_engineer",
+      "supporting_signals": [
+        "Co-located activity in BENGALURU",
+        "Geographic area overlap"
+      ]
+    },
+    {
+      "id": "link_usr_demo_1_4",
+      "user_id": "usr_demo_1",
+      "source_a": "GitHub Repository (dotfiles)",
+      "source_b": "Reddit Comment (undefined)",
+      "signal": "Potential Linkage: Cross-Referenced Open Source Project",
+      "confidence": "High",
+      "evidence": "Reddit post in undefined explicitly references GitHub repository \"dotfiles\".",
+      "evidence_url": "https://reddit.com/r/Neovim/comments/a1029/neovim_lua_setup/e99120",
+      "supporting_signals": [
+        "Direct project citation: dotfiles",
+        "Overlapping technical repository ownership"
+      ]
+    },
+    {
+      "id": "link_usr_demo_1_5",
+      "user_id": "usr_demo_1",
+      "source_a": "GitHub Website Field",
+      "source_b": "Reddit Comment Link",
+      "signal": "Direct Linkage: Shared Personal Domain / Website",
+      "confidence": "High",
+      "evidence": "GitHub profile website (https://aarav-sharma.dev) is linked directly in Reddit comment history.",
+      "evidence_url": "https://reddit.com/r/rust/comments/z8821a/async_rust_benchmarks/c8812",
+      "supporting_signals": [
+        "Same canonical personal domain",
+        "Direct self-promotion link"
+      ]
+    },
+    {
+      "id": "link_usr_current_1",
+      "user_id": "usr_current",
+      "source_a": "GitHub Repository (Room)",
+      "source_b": "Reddit Comment (r/TwentiesIndia)",
+      "signal": "Potential Linkage: Cross-Referenced Open Source Project",
+      "confidence": "High",
+      "evidence": "Reddit post in r/TwentiesIndia explicitly references GitHub repository \"Room\".",
+      "evidence_url": "https://reddit.com/r/TwentiesIndia/comments/1tfosnx/what_to_do_this_pigeon_just_died_in_front_of_my/omemexw/",
+      "supporting_signals": [
+        "Direct project citation: Room",
+        "Overlapping technical repository ownership"
+      ]
+    },
+    {
+      "id": "link_usr_current_2",
+      "user_id": "usr_current",
+      "source_a": "GitHub Repository (Hackathon)",
+      "source_b": "Reddit Comment (r/Gyangangacollege)",
+      "signal": "Potential Linkage: Cross-Referenced Open Source Project",
+      "confidence": "High",
+      "evidence": "Reddit post in r/Gyangangacollege explicitly references GitHub repository \"Hackathon\".",
+      "evidence_url": "https://reddit.com/r/Gyangangacollege/comments/1sw9lfs/welcome_to_rgyangangacollege_introduce_yourself/",
+      "supporting_signals": [
+        "Direct project citation: Hackathon",
+        "Overlapping technical repository ownership"
+      ]
+    }
+  ],
+  "session": {
+    "userId": "usr_current"
+  }
+}

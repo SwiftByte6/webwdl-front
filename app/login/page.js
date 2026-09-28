@@ -1,284 +1,224 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { ArrowLeft, Eye, EyeOff, ShieldCheck, CheckCircle2, AlertCircle, Lock, Mail } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import GithubIcon from '@/components/GithubIcon';
+import { Shield, ArrowRight, CheckCircle2, LogOut, UserCheck, RefreshCw } from 'lucide-react';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const router = useRouter();
+  const [githubUsername, setGithubUsername] = useState('aarav_dev');
+  const [redditUsername, setRedditUsername] = useState('aarav_dev');
+  const [authenticated, setAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Validation errors state
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
-
-  // Validate single field
-  const validateField = (field, value) => {
-    let error = '';
-    if (field === 'email') {
-      if (!value.trim()) {
-        error = 'Email or Handle is required';
-      } else if (value.includes('@') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        error = 'Please enter a valid email address';
-      } else if (value.trim().length < 3) {
-        error = 'Must be at least 3 characters long';
+  const checkAuthStatus = async () => {
+    try {
+      const res = await fetch('/api/auth');
+      const data = await res.json();
+      setAuthenticated(data.authenticated);
+      if (data.user) {
+        setUser(data.user);
+        setGithubUsername(data.user.github_username || '');
+        setRedditUsername(data.user.reddit_username || '');
       }
-    }
-
-    if (field === 'password') {
-      if (!value) {
-        error = 'Password is required';
-      } else if (value.length < 6) {
-        error = 'Password must be at least 6 characters long';
-      }
-    }
-
-    return error;
-  };
-
-  // Handle Input Changes with Real-time Validation
-  const handleChange = (field, value) => {
-    if (field === 'email') setEmail(value);
-    if (field === 'password') setPassword(value);
-
-    if (touched[field]) {
-      const error = validateField(field, value);
-      setErrors((prev) => ({ ...prev, [field]: error }));
+    } catch (err) {
+      console.error('Auth check error:', err);
     }
   };
 
-  // Handle Blur
-  const handleBlur = (field) => {
-    setTouched((prev) => ({ ...prev, [field]: true }));
-    const val = field === 'email' ? email : password;
-    const error = validateField(field, val);
-    setErrors((prev) => ({ ...prev, [field]: error }));
-  };
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
-  // Handle Form Submission
-  const handleSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    
-    // Mark all as touched
-    setTouched({ email: true, password: true });
-
-    const emailErr = validateField('email', email);
-    const passErr = validateField('password', password);
-
-    if (emailErr || passErr) {
-      setErrors({ email: emailErr, password: passErr });
-      return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'login',
+          github_username: githubUsername,
+          reddit_username: redditUsername
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setAuthenticated(true);
+        setUser(data.user);
+        router.push('/risk-report');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    // Clear errors & trigger submitting
-    setErrors({});
-    setIsSubmitting(true);
-
-    // Simulate API Auth call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setLoginSuccess(true);
-    }, 1000);
+  const handleSignOut = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setAuthenticated(false);
+        setUser(null);
+        setGithubUsername('');
+        setRedditUsername('');
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-4 relative font-sans selection:bg-brand-orange/20 selection:text-brand-orange">
-      
-      {/* Top Back to Home Link */}
-      <div className="absolute top-6 left-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white border border-slate-200 px-3.5 py-2 rounded-xl shadow-xs transition-all hover:border-slate-300"
-        >
-          <ArrowLeft className="w-4 h-4 text-brand-orange" />
-          <span>Back to Home</span>
-        </Link>
-      </div>
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between selection:bg-brand-orange/20 selection:text-brand-orange pt-20">
+      <Navbar />
 
-      {/* Main Minimalist Login Card */}
-      <div className="w-full max-w-md bg-white border border-slate-200/90 rounded-3xl shadow-xl p-8 sm:p-10 relative overflow-hidden">
-        
-        {/* Top Accent Line */}
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-400 via-brand-orange to-amber-500" />
+      <main className="flex-grow flex items-center justify-center p-6 py-16">
+        <div className="w-full max-w-lg bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-xl relative overflow-hidden">
+          {/* Top Decorative Glow */}
+          <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* Card Brand Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-orange-50 border border-orange-200 text-brand-orange mb-3 shadow-xs">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="text-center">
+            <div className="w-16 h-16 bg-orange-50 border border-orange-200 rounded-2xl flex items-center justify-center mx-auto mb-4 text-brand-orange shadow-md">
+              <Shield className="w-8 h-8 text-brand-orange" />
+            </div>
+
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              {authenticated ? 'Linked Account Settings' : 'Sign In & Link Accounts'}
+            </h1>
+            <p className="text-slate-600 text-sm mt-2 font-medium">
+              Link your individual GitHub and Reddit handles for self-privacy exposure auditing.
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Sign In
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1.5 font-normal">
-            Enter your credentials to access your Deanonymizer audit dashboard
-          </p>
-        </div>
 
-        {/* Success Alert */}
-        {loginSuccess ? (
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3 animate-fadeIn">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 mx-auto">
-              <CheckCircle2 className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="text-sm font-bold text-emerald-900">Authentication Successful!</h3>
-              <p className="text-xs text-emerald-700 mt-1">Redirecting to your privacy audit dashboard...</p>
-            </div>
-            <Link
-              href="/"
-              className="inline-block mt-2 text-xs font-bold text-white bg-brand-orange hover:bg-brand-orange-hover px-4 py-2 rounded-xl transition-all shadow-md"
-            >
-              Continue to Dashboard
-            </Link>
-          </div>
-        ) : (
-          /* Login Form */
-          <form onSubmit={handleSubmit} noValidate className="space-y-5">
-            
-            {/* Email / Username Input Field */}
-            <div>
-              <label htmlFor="email" className="block text-xs font-bold text-slate-700 mb-1.5 font-mono">
-                Email or Handle
-              </label>
-              <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-slate-400 pointer-events-none">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <input
-                  id="email"
-                  type="text"
-                  value={email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  onBlur={() => handleBlur('email')}
-                  placeholder="name@example.com or @handle"
-                  className={`w-full pl-10 pr-4 py-3 text-xs bg-slate-50 border rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none transition-all font-mono ${
-                    touched.email && errors.email
-                      ? 'border-rose-300 bg-rose-50/30 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20'
-                      : touched.email && !errors.email && email
-                      ? 'border-emerald-300 focus:border-emerald-500 focus:bg-white'
-                      : 'border-slate-200 focus:border-brand-orange focus:bg-white'
-                  }`}
+          {authenticated && user ? (
+            /* Signed In Active Session View */
+            <div className="mt-8 space-y-6">
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex items-center gap-4">
+                <img
+                  src={user.avatar_url || `https://github.com/${user.github_username}.png`}
+                  alt={user.github_username}
+                  className="w-14 h-14 rounded-2xl border-2 border-brand-orange object-cover shadow-md"
                 />
-              </div>
-              {touched.email && errors.email && (
-                <div className="flex items-center gap-1 mt-1.5 text-[11px] text-rose-600 font-medium">
-                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                  <span>{errors.email}</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-extrabold text-base text-slate-900">{user.name}</span>
+                    <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1 font-mono">
+                      <UserCheck className="w-3 h-3" /> Signed In
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-500 font-mono mt-0.5">
+                    GitHub: <span className="text-slate-900 font-bold">@{user.github_username}</span> | Reddit: <span className="text-slate-900 font-bold">u/{user.reddit_username}</span>
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* Password Input Field */}
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label htmlFor="password" className="block text-xs font-bold text-slate-700 font-mono">
-                  Password
-                </label>
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert('Password reset link has been sent to your registered email.');
-                  }}
-                  className="text-[11px] font-semibold text-brand-orange hover:underline"
-                >
-                  Forgot password?
-                </a>
-              </div>
-              <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-slate-400 pointer-events-none">
-                  <Lock className="w-4 h-4" />
-                </div>
-                <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => handleChange('password', e.target.value)}
-                  onBlur={() => handleBlur('password')}
-                  placeholder="••••••••"
-                  className={`w-full pl-10 pr-10 py-3 text-xs bg-slate-50 border rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none transition-all font-mono ${
-                    touched.password && errors.password
-                      ? 'border-rose-300 bg-rose-50/30 focus:border-rose-500 focus:ring-2 focus:ring-rose-500/20'
-                      : touched.password && !errors.password && password
-                      ? 'border-emerald-300 focus:border-emerald-500 focus:bg-white'
-                      : 'border-slate-200 focus:border-brand-orange focus:bg-white'
-                  }`}
-                />
+              <div className="flex flex-col gap-3">
                 <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 text-slate-400 hover:text-slate-600 transition-colors"
-                  tabIndex={-1}
+                  onClick={() => router.push('/risk-report')}
+                  className="w-full bg-brand-orange hover:bg-brand-orange-hover text-white font-extrabold py-4 px-6 rounded-full transition-all flex items-center justify-center gap-3 shadow-glow hover:shadow-glow-lg text-sm tracking-wide"
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  <RefreshCw className="w-4 h-4 animate-spin-slow" />
+                  <span>Run Privacy Audit for Linked Accounts</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={handleSignOut}
+                  disabled={loading}
+                  className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 px-6 rounded-full transition-all flex items-center justify-center gap-2 text-sm border border-slate-200"
+                >
+                  <LogOut className="w-4 h-4 text-slate-500" />
+                  <span>Sign Out of Account</span>
                 </button>
               </div>
-              {touched.password && errors.password && (
-                <div className="flex items-center gap-1 mt-1.5 text-[11px] text-rose-600 font-medium">
-                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                  <span>{errors.password}</span>
+            </div>
+          ) : (
+            /* Sign In / Link Handles Form */
+            <form onSubmit={handleLoginSubmit} className="mt-8 space-y-5">
+              <div>
+                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  GitHub Handle
+                </label>
+                <div className="relative flex items-center">
+                  <span className="absolute left-4 text-slate-400 font-mono text-sm">@</span>
+                  <input
+                    type="text"
+                    required
+                    value={githubUsername}
+                    onChange={(e) => setGithubUsername(e.target.value)}
+                    placeholder="e.g. octocat or your GitHub username"
+                    className="w-full py-3.5 pl-9 pr-4 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 font-mono font-semibold"
+                  />
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* Remember Me Checkbox */}
-            <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded text-brand-orange focus:ring-brand-orange accent-brand-orange border-slate-300 cursor-pointer"
-                />
-                <span className="text-xs text-slate-600 font-medium">Remember this device</span>
-              </label>
-            </div>
+              <div>
+                <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Linked Reddit Handle
+                </label>
+                <div className="relative flex items-center">
+                  <span className="absolute left-4 text-slate-400 font-mono text-sm">u/</span>
+                  <input
+                    type="text"
+                    required
+                    value={redditUsername}
+                    onChange={(e) => setRedditUsername(e.target.value)}
+                    placeholder="e.g. aarav_dev or your Reddit handle"
+                    className="w-full py-3.5 pl-9 pr-4 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 font-mono font-semibold"
+                  />
+                </div>
+              </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-3.5 px-4 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 mt-2 cursor-pointer"
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Authenticating...</span>
-                </>
-              ) : (
-                <span>Sign In</span>
-              )}
-            </button>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2 text-xs text-slate-600 font-medium">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Live data will be fetched directly for the linked accounts.</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>You can Sign Out or change handles at any time.</span>
+                </div>
+              </div>
 
-          </form>
-        )}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-brand-orange hover:bg-brand-orange-hover text-white font-extrabold py-4 px-6 rounded-full transition-all flex items-center justify-center gap-3 shadow-glow hover:shadow-glow-lg text-sm tracking-wide"
+              >
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <>
+                    <GithubIcon className="w-5 h-5 fill-current" />
+                    <span>Sign In & Link Accounts</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+          )}
 
-        {/* Footer Link */}
-        <div className="mt-8 pt-6 border-t border-slate-100 text-center text-xs text-slate-500 font-medium">
-          Don't have an account?{' '}
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              alert('Registration is currently open for Vidyalankar Institute students and faculty.');
-            }}
-            className="font-bold text-brand-orange hover:underline"
-          >
-            Create an account
-          </a>
+          <p className="text-[11px] text-slate-500 text-center mt-6 font-medium">
+            Self-privacy exposure audit strictly operates on user-linked accounts.
+          </p>
         </div>
+      </main>
 
-      </div>
-
-      {/* Page Footer Text */}
-      <div className="mt-8 text-center text-xs text-slate-400 font-mono">
-        Deanonymizer Engine v1.0.4 • Vidyalankar Institute of Technology
-      </div>
-
+      <Footer />
     </div>
   );
 }

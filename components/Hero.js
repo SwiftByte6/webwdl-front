@@ -56,7 +56,7 @@ export default function Hero({ onOpenPaperModal }) {
     {
       id: 'github',
       name: 'GitHub',
-      sampleHandle: 'github.com/alice-dev',
+      sampleHandle: 'github.com/SwiftByte6',
       desc: 'Audit public commit syntax, n-grams, and repository metadata',
       logo: GithubLogo,
       badge: 'Commit Logs',
@@ -64,7 +64,7 @@ export default function Hero({ onOpenPaperModal }) {
     {
       id: 'reddit',
       name: 'Reddit',
-      sampleHandle: 'OriginalCountry4691',
+      sampleHandle: 'reddit.com/user/tech_wanderer',
       desc: 'Inspect comment frequency & subreddit vocabulary signatures',
       logo: RedditLogo,
       badge: 'Subreddit Stylometry',
@@ -102,9 +102,7 @@ export default function Hero({ onOpenPaperModal }) {
   const handleSelectPlatform = (sampleHandle) => {
     setSearchQuery(sampleHandle);
     setIsDropdownOpen(false);
-    if (sampleHandle) {
-      window.location.href = `/risk-report?handle=${encodeURIComponent(sampleHandle)}`;
-    }
+    window.location.href = `/risk-report?handle=${encodeURIComponent(sampleHandle)}`;
   };
 
   const handleSearchSubmit = (e) => {
@@ -113,7 +111,7 @@ export default function Hero({ onOpenPaperModal }) {
     if (searchQuery.trim()) {
       window.location.href = `/risk-report?handle=${encodeURIComponent(searchQuery.trim())}`;
     } else {
-      window.location.href = '/risk-report?handle=aarav_dev';
+      window.location.href = '/risk-report';
     }
   };
 
@@ -242,37 +240,7 @@ export default function Hero({ onOpenPaperModal }) {
           )}
         </div>
 
-     
-
       </div>
-
-      {/* INFINITE MARQUEE AT THE HERO SECTION BOTTOM (BIG TEXT) */}
-      {/* <div className="mt-14 absolute bottom-0 pt-6 pb-2 border-t border-orange-900/60 bg-darkorange-950/80 backdrop-blur-md overflow-hidden  select-none">
-        <div className="animate-marquee flex items-center whitespace-nowrap">
-     
-          <div className="flex items-center gap-8 px-4">
-            {marqueeItems.map((text, idx) => (
-              <div key={`m1-${idx}`} className="flex items-center gap-8">
-                <span className={`text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight ${idx % 2 === 0 ? 'text-white drop-shadow-sm' : 'text-stroke-orange'}`}>
-                  {text}
-                </span>
-                <span className="w-3 h-3 rounded-full bg-brand-orange shadow-glow inline-block"></span>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-8 px-4">
-            {marqueeItems.map((text, idx) => (
-              <div key={`m2-${idx}`} className="flex items-center gap-8">
-                <span className={`text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight ${idx % 2 === 0 ? 'text-white drop-shadow-sm' : 'text-stroke-orange'}`}>
-                  {text}
-                </span>
-                <span className="w-3 h-3 rounded-full bg-brand-orange shadow-glow inline-block"></span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
 
     </section>
   );
