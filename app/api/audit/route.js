@@ -6,7 +6,6 @@ import {
   getGithubData,
   getRedditData
 } from '@/lib/db.js';
-import { runSeed } from '@/lib/seed.js';
 import { fetchGithubProfile } from '@/lib/collectors/github.js';
 import { fetchRedditActivity } from '@/lib/collectors/reddit.js';
 import { extractGithubAudit, extractRedditAudit } from '@/lib/engine/extractor.js';
@@ -22,63 +21,68 @@ export async function GET(request) {
   let user = getCurrentUser();
 
   if (queryHandle) {
-    user = updateUserHandles(user.id, queryHandle, queryReddit || queryHandle);
+    user = updateUserHandles(user ? user.id : 'usr_current', queryHandle, queryReddit || queryHandle);
   }
 
-  const ghUsername = user.github_username || 'aarav_dev';
-  const rdUsername = user.reddit_username || ghUsername || 'aarav_dev';
+  if (!user) {
+    return Response.json({
+      authenticated: false,
+      user: null,
+      message: 'Please link your account first to run an audit.'
+    }, { status: 401 });
+  }
+
+  const ghUsername = user.github_username;
+  const rdUsername = user.reddit_username;
 
   // 1. Fetch LIVE GitHub Profile & Repositories
-  let liveGh = await fetchGithubProfile(ghUsername);
+  let liveGh = ghUsername ? await fetchGithubProfile(ghUsername) : null;
   if (!liveGh) {
-    liveGh = getGithubData(user.id);
-    if (!liveGh) {
-      runSeed();
-      liveGh = getGithubData(user.id);
-    }
+    liveGh = getGithubData(user.id) || {
+      username: ghUsername || 'unknown',
+      name: ghUsername || 'User',
+      avatar_url: ghUsername ? `https://github.com/${ghUsername}.png` : '',
+      repos: []
+    };
   } else {
     saveGithubData(user.id, liveGh);
   }
 
   // 2. Fetch LIVE Reddit Activity
-  let liveRd = await fetchRedditActivity(rdUsername, 100);
+  let liveRd = rdUsername ? await fetchRedditActivity(rdUsername, 100) : [];
   if (!liveRd || liveRd.length === 0) {
-    liveRd = getRedditData(user.id);
-    if (!liveRd || liveRd.length === 0) {
-      runSeed();
-      liveRd = getRedditData(user.id);
-    }
+    liveRd = getRedditData(user.id) || [];
   } else {
     saveRedditData(user.id, liveRd);
   }
 
-  // 3. SEPARATE INDEPENDENT PLATFORM AUDITS (No Cross Engine Fusion)
+  // 3. SEPARATE INDEPENDENT PLATFORM AUDITS
   const githubAudit = extractGithubAudit(liveGh);
-  const redditAudit = extractRedditAudit(liveRd, rdUsername);
+  const redditAudit = extractRedditAudit(liveRd, rdUsername || 'unknown');
 
   return Response.json({
     user: {
       id: user.id,
-      name: liveGh.name || `@${ghUsername}`,
-      github_username: ghUsername,
-      reddit_username: rdUsername,
-      avatar_url: liveGh.avatar_url || `https://github.com/${ghUsername}.png`,
-      email: liveGh.email || user.email
+      name: liveGh.name || (ghUsername ? `@${ghUsername}` : `u/${rdUsername}`),
+      github_username: ghUsername || '',
+      reddit_username: rdUsername || '',
+      avatar_url: liveGh.avatar_url || (ghUsername ? `https://github.com/${ghUsername}.png` : 'https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png'),
+      email: liveGh.email || user.email || ''
     },
     connectionStatus: {
-      github: { connected: true, username: ghUsername, url: `https://github.com/${ghUsername}` },
-      reddit: { connected: true, username: rdUsername, url: `https://www.reddit.com/user/${rdUsername}` }
+      github: { connected: Boolean(ghUsername), username: ghUsername || '', url: ghUsername ? `https://github.com/${ghUsername}` : '' },
+      reddit: { connected: Boolean(rdUsername), username: rdUsername || '', url: rdUsername ? `https://www.reddit.com/user/${rdUsername}` : '' }
     },
     githubAudit,
     redditAudit,
     githubData: {
       profile: {
-        name: liveGh.name,
-        bio: liveGh.bio,
-        location: liveGh.location,
-        company: liveGh.company,
-        website: liveGh.website,
-        email: liveGh.email
+        name: liveGh.name || '',
+        bio: liveGh.bio || '',
+        location: liveGh.location || '',
+        company: liveGh.company || '',
+        website: liveGh.website || '',
+        email: liveGh.email || ''
       },
       repos: liveGh.repos || []
     },

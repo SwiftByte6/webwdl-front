@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, FileText, ArrowRight, Activity, LogOut, UserCheck } from 'lucide-react';
+import { ShieldCheck, FileText, ArrowRight, Activity, LogOut, UserCheck, ExternalLink } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -64,7 +64,7 @@ export default function Navbar() {
         body: JSON.stringify({ action: 'logout' })
       });
       setUser(null);
-      router.push('/login');
+      window.location.href = '/login';
     } catch (err) {
       console.error('Logout error:', err);
     }
@@ -134,15 +134,20 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             {user ? (
               <div className="flex items-center gap-2">
-                <span className={`text-xs font-mono font-bold px-3 py-1.5 rounded-full border hidden sm:inline-block ${
-                  isScrolledStyle ? 'bg-orange-50 text-orange-700 border-orange-200' : 'bg-darkorange-900 text-orange-300 border-orange-800'
-                }`}>
-                  @{user.github_username}
-                </span>
+                <a
+                  href={user.reddit_username ? `https://reddit.com/user/${user.reddit_username}` : `https://github.com/${user.github_username}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-xs font-mono font-bold px-3 py-1.5 rounded-full border hidden sm:inline-flex items-center gap-1.5 hover:underline ${
+                    isScrolledStyle ? 'bg-orange-50 text-orange-700 border-orange-200' : 'bg-darkorange-900 text-orange-300 border-orange-800'
+                  }`}
+                >
+                  {user.reddit_username ? `u/${user.reddit_username}` : `@${user.github_username}`}
+                </a>
 
                 <button
                   onClick={handleSignOut}
-                  className={`text-xs font-semibold px-3.5 py-2 rounded-full border transition-all flex items-center gap-1.5 ${
+                  className={`text-xs font-semibold px-3.5 py-2 rounded-full border transition-all flex items-center gap-1.5 cursor-pointer ${
                     isScrolledStyle 
                       ? 'border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900' 
                       : 'border-orange-500/40 text-orange-100 hover:bg-white/10 hover:text-white'

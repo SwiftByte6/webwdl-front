@@ -14,32 +14,145 @@ import {
   RefreshCw,
   Globe,
   Layers,
-  Activity
+  Activity,
+  Copy,
+  Check,
+  X,
+  Download,
+  FileText
 } from 'lucide-react';
+
+// Gemini AI Sparkle Icon
+const GeminiSparkleIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
+      fill="url(#gemini-gradient)"
+    />
+    <defs>
+      <linearGradient id="gemini-gradient" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#ff5722" />
+        <stop offset="0.5" stopColor="#ff8a65" />
+        <stop offset="1" stopColor="#ffab91" />
+      </linearGradient>
+    </defs>
+  </svg>
+);
 
 export default function RiskReportPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [selectedPlatform, setSelectedPlatform] = useState('github'); // 'github' | 'reddit'
+  const [refreshing, setRefreshing] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState('reddit'); // 'github' | 'reddit'
 
-  const fetchAuditData = async () => {
-    setLoading(true);
+  // AI Remediation Modal State
+  const [activeSanitizeModal, setActiveSanitizeModal] = useState(false);
+  const [originalSnippet, setOriginalSnippet] = useState('');
+  const [sanitizedSnippet, setSanitizedSnippet] = useState('');
+  const [sanitizing, setSanitizing] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const fetchAuditData = async (forceRefresh = false) => {
+    if (forceRefresh) setRefreshing(true);
+    else setLoading(true);
     try {
-      const res = await fetch('/api/audit');
+      const url = forceRefresh ? '/api/audit?refresh=true' : '/api/audit';
+      const res = await fetch(url);
+      if (res.status === 401) {
+        setData({ unauthenticated: true });
+        return;
+      }
       const json = await res.json();
-      setData(json);
+      if (!json.user) {
+        setData({ unauthenticated: true });
+      } else {
+        setData(json);
+        if (json.connectionStatus?.reddit?.connected && !json.connectionStatus?.github?.connected) {
+          setSelectedPlatform('reddit');
+        } else if (json.connectionStatus?.github?.connected && !json.connectionStatus?.reddit?.connected) {
+          setSelectedPlatform('github');
+        }
+      }
     } catch (err) {
       console.error('Failed to load audit data:', err);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
   useEffect(() => {
-    fetchAuditData();
+    fetchAuditData(false);
   }, []);
 
-  if (loading || !data) {
+  const handleOpenSanitizer = async (finding) => {
+    const textToSanitize = typeof finding === 'string' ? finding : (finding.evidenceSnippet || finding.fullText || finding.description || '');
+    const findingType = typeof finding === 'string' ? 'entity' : (finding.category || finding.type || 'entity');
+
+    setOriginalSnippet(textToSanitize);
+    setActiveSanitizeModal(true);
+    setSanitizing(true);
+    setCopied(false);
+    try {
+      const res = await fetch('/api/sanitize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: textToSanitize,
+          type: findingType
+        })
+      });
+      const resJson = await res.json();
+      if (resJson.success) {
+        setSanitizedSnippet(resJson.sanitized);
+      } else {
+        setSanitizedSnippet(textToSanitize);
+      }
+    } catch (err) {
+      setSanitizedSnippet(textToSanitize);
+    } finally {
+      setSanitizing(false);
+    }
+  };
+
+  const handleCopySanitized = () => {
+    navigator.clipboard.writeText(sanitizedSnippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadReport = async () => {
+    if (!data) return;
+    setDownloading(true);
+    try {
+      const res = await fetch('/api/report/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const username = data.user?.reddit_username || data.user?.github_username || 'user';
+        a.download = `privacy_audit_report_${username}.html`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        alert('Failed to generate report download. Please try again.');
+      }
+    } catch (e) {
+      console.error('Download report error:', e);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between pt-20">
         <Navbar />
@@ -58,9 +171,33 @@ export default function RiskReportPage() {
     );
   }
 
-  const { user, connectionStatus, githubAudit, redditAudit } = data;
+  if (!data || data.unauthenticated || !data.user) {
+    return (
+      <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-between pt-20">
+        <Navbar />
+        <main className="flex-grow flex flex-col items-center justify-center p-8 text-center">
+          <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 text-brand-orange">
+            <ShieldAlert className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-extrabold text-slate-900 mb-2">No Linked Account Found</h2>
+          <p className="text-slate-600 max-w-md text-sm font-medium mb-6">
+            Please link your verified GitHub or Reddit account to inspect your privacy exposure report.
+          </p>
+          <a
+            href="/login"
+            className="bg-brand-orange hover:bg-brand-orange-hover text-white font-extrabold px-8 py-3.5 rounded-full transition-all shadow-glow text-sm cursor-pointer"
+          >
+            Go to Account Linking
+          </a>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
-  const currentAudit = selectedPlatform === 'github' ? githubAudit : redditAudit;
+  const { user, connectionStatus, githubAudit, redditAudit } = data;
+  const currentAudit = selectedPlatform === 'github' ? (githubAudit || {}) : (redditAudit || {});
+  const activeAvatar = user.avatar_url || (user.reddit_username ? 'https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png' : `https://github.com/${user.github_username}.png`);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 pt-20 selection:bg-brand-orange/20 selection:text-brand-orange">
@@ -71,40 +208,80 @@ export default function RiskReportPage() {
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <img
-              src={user.avatar_url || `https://github.com/${user.github_username}.png`}
-              alt={user.name}
-              className="w-16 h-16 rounded-2xl border-2 border-brand-orange object-cover shadow-md"
+              src={activeAvatar}
+              alt={user.name || 'User Avatar'}
+              className="w-16 h-16 rounded-2xl border-2 border-brand-orange object-cover shadow-md bg-orange-50"
             />
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{user.name}</h1>
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                  {user.reddit_username ? `u/${user.reddit_username}` : (user.github_username ? `@${user.github_username}` : (user.name || 'Anonymous User'))}
+                </h1>
                 <span className="bg-orange-50 text-orange-700 text-xs font-bold px-3 py-1 rounded-full border border-orange-200 flex items-center gap-1 font-mono">
                   <UserCheck className="w-3.5 h-3.5 text-brand-orange" />
                   Authenticated User
                 </span>
               </div>
-              <p className="text-slate-600 text-sm mt-1 font-medium">
-                Independent Platform Privacy Auditor (Separate GitHub & Reddit Analysis)
-              </p>
+              <div className="flex items-center gap-3 text-xs text-slate-600 mt-1 font-medium font-mono">
+                {user.reddit_username && (
+                  <a
+                    href={`https://www.reddit.com/user/${user.reddit_username}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-orange-600 hover:text-orange-800 font-bold hover:underline flex items-center gap-1"
+                  >
+                    u/{user.reddit_username}
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+                {user.github_username && (
+                  <a
+                    href={`https://github.com/${user.github_username}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-700 hover:text-slate-900 font-bold hover:underline flex items-center gap-1"
+                  >
+                    @{user.github_username}
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Re-run Audit Button */}
-          <button
-            onClick={fetchAuditData}
-            className="bg-brand-orange hover:bg-brand-orange-hover text-white font-extrabold px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-glow hover:shadow-glow-lg text-xs tracking-wide"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Re-Run Independent Audit
-          </button>
+          {/* Action Buttons: Download Report & Re-run Audit */}
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              id="btn-download-report-top"
+              onClick={handleDownloadReport}
+              disabled={downloading}
+              className="bg-slate-900 hover:bg-slate-800 text-white font-extrabold px-5 py-3 rounded-full transition-all flex items-center gap-2 shadow-sm text-xs tracking-wide cursor-pointer disabled:opacity-50"
+            >
+              {downloading ? (
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              ) : (
+                <Download className="w-4 h-4 text-orange-400" />
+              )}
+              <span>{downloading ? 'Generating Report...' : 'Download Report'}</span>
+            </button>
+
+            <button
+              onClick={() => fetchAuditData(true)}
+              disabled={refreshing}
+              className="bg-brand-orange hover:bg-brand-orange-hover text-white font-extrabold px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-glow hover:shadow-glow-lg text-xs tracking-wide cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              <span>{refreshing ? 'Refreshing...' : 'Re-Run Live Audit'}</span>
+            </button>
+          </div>
         </div>
 
-        {/* --- PROMINENT INDEPENDENT PLATFORM SELECTOR TABS --- */}
+        {/* --- INDEPENDENT PLATFORM SELECTOR TABS --- */}
         <div className="flex justify-center">
           <div className="bg-slate-200/80 p-1.5 rounded-full border border-slate-300 inline-flex items-center gap-2 shadow-inner">
             <button
               onClick={() => setSelectedPlatform('github')}
-              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 ${
+              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
                 selectedPlatform === 'github'
                   ? 'bg-slate-900 text-white shadow-md'
                   : 'text-slate-700 hover:text-slate-900'
@@ -112,14 +289,16 @@ export default function RiskReportPage() {
             >
               <GithubIcon className="w-5 h-5 fill-current" />
               <span>GitHub Audit</span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-800 text-orange-300">
-                @{connectionStatus.github.username}
-              </span>
+              {connectionStatus?.github?.connected && (
+                <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-800 text-orange-300">
+                  @{connectionStatus.github.username}
+                </span>
+              )}
             </button>
 
             <button
               onClick={() => setSelectedPlatform('reddit')}
-              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 ${
+              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
                 selectedPlatform === 'reddit'
                   ? 'bg-brand-orange text-white shadow-glow font-black'
                   : 'text-slate-700 hover:text-slate-900'
@@ -129,9 +308,11 @@ export default function RiskReportPage() {
                 <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701z" />
               </svg>
               <span>Reddit Audit</span>
-              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-orange-700 text-white">
-                u/{connectionStatus.reddit.username}
-              </span>
+              {connectionStatus?.reddit?.connected && (
+                <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-orange-700 text-white">
+                  u/{connectionStatus.reddit.username}
+                </span>
+              )}
             </button>
           </div>
         </div>
@@ -162,8 +343,29 @@ export default function RiskReportPage() {
 
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <div className="text-xs font-mono font-bold text-slate-500 uppercase">Platform Risk Score</div>
-                <div className="text-3xl font-black text-slate-900">{currentAudit.score} / 100</div>
+                <div className="text-xs font-mono font-bold text-slate-500 uppercase">Information Exposure</div>
+                <div className="mt-1">
+                  {currentAudit.exposureLevel === 'High' ? (
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-rose-100 text-rose-800 border border-rose-300 shadow-xs">
+                      <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+                      High Exposure
+                    </span>
+                  ) : currentAudit.exposureLevel === 'Moderate' ? (
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-amber-100 text-amber-800 border border-amber-300 shadow-xs">
+                      <span className="w-2 h-2 rounded-full bg-amber-600"></span>
+                      Moderate Exposure
+                    </span>
+                  ) : currentAudit.exposureLevel === 'Low' ? (
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-xs">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                      Low Exposure
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase font-mono bg-slate-100 text-slate-600 border border-slate-300">
+                      Not Linked
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -177,7 +379,7 @@ export default function RiskReportPage() {
                 Predicted State / Location
               </div>
               <div className="text-lg font-extrabold text-slate-900 mt-1">
-                {currentAudit.predictedState}
+                {currentAudit.predictedState || 'None Disclosed'}
               </div>
               <p className="text-xs text-slate-500 mt-2 font-medium">
                 Derived strictly from {selectedPlatform === 'github' ? 'GitHub profile location metadata' : 'Reddit comment text mentions & subreddits'}.
@@ -192,11 +394,15 @@ export default function RiskReportPage() {
                   Primary Repository Languages
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {currentAudit.languages?.map((lang, idx) => (
-                    <span key={idx} className="bg-white border border-slate-200 text-slate-900 px-3.5 py-1 rounded-full text-xs font-extrabold font-mono shadow-xs">
-                      {lang}
-                    </span>
-                  ))}
+                  {currentAudit.languages && currentAudit.languages.length > 0 ? (
+                    currentAudit.languages.map((lang, idx) => (
+                      <span key={idx} className="bg-white border border-slate-200 text-slate-900 px-3.5 py-1 rounded-full text-xs font-extrabold font-mono shadow-xs">
+                        {lang}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-slate-500 italic">No public repositories</span>
+                  )}
                 </div>
               </div>
             ) : (
@@ -206,11 +412,15 @@ export default function RiskReportPage() {
                   Active Subreddits & Communities
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {currentAudit.subreddits?.map((sub, idx) => (
-                    <span key={idx} className="bg-orange-50 border border-orange-200 text-brand-orange px-3.5 py-1 rounded-full text-xs font-bold font-mono shadow-xs">
-                      {sub}
-                    </span>
-                  ))}
+                  {currentAudit.subreddits && currentAudit.subreddits.length > 0 ? (
+                    currentAudit.subreddits.map((sub, idx) => (
+                      <span key={idx} className="bg-orange-50 border border-orange-200 text-brand-orange px-3.5 py-1 rounded-full text-xs font-bold font-mono shadow-xs">
+                        {sub}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-slate-500 italic">No active subreddits found</span>
+                  )}
                 </div>
               </div>
             )}
@@ -222,7 +432,7 @@ export default function RiskReportPage() {
                 Revealed Identity / Email
               </div>
               <div className="text-base font-extrabold text-slate-900 mt-1 font-mono">
-                {selectedPlatform === 'github' ? currentAudit.email : currentAudit.revealedEmail}
+                {(selectedPlatform === 'github' ? currentAudit.email : currentAudit.revealedEmail) || 'None Disclosed'}
               </div>
               <p className="text-xs text-slate-500 mt-2 font-medium">
                 {selectedPlatform === 'github' ? 'Public email listed in profile or commit log' : 'Obfuscated or plain-text email extracted from comments'}.
@@ -233,67 +443,179 @@ export default function RiskReportPage() {
 
         {/* --- PLATFORM SPECIFIC EXPOSURE FINDINGS --- */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
-          <div className="pb-6 border-b border-slate-100">
-            <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-              <ShieldAlert className="w-6 h-6 text-rose-600" />
-              {selectedPlatform === 'github' ? 'GitHub Specific Leaks' : 'Reddit Specific Leaks'}
-            </h3>
-            <p className="text-slate-600 text-sm mt-1 font-medium">
-              Deterministic findings extracted strictly from {selectedPlatform === 'github' ? 'GitHub profile metadata and repos' : 'Reddit comment text and subreddits'}.
-            </p>
+          <div className="pb-6 border-b border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                <ShieldAlert className="w-6 h-6 text-rose-600" />
+                {selectedPlatform === 'github' ? 'GitHub Specific Leaks' : 'Reddit Specific Leaks'}
+              </h3>
+              <p className="text-slate-600 text-sm mt-1 font-medium">
+                Deterministic findings extracted strictly from {selectedPlatform === 'github' ? 'GitHub profile metadata and repos' : 'Reddit comment text and subreddits'}.
+              </p>
+            </div>
+            
+            <button
+              id="btn-download-report-findings"
+              onClick={handleDownloadReport}
+              disabled={downloading}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 text-xs font-bold text-brand-orange transition-all cursor-pointer shadow-xs disabled:opacity-50"
+            >
+              <FileText className="w-4 h-4" />
+              <span>{downloading ? 'Preparing Download...' : 'Download Executive Report'}</span>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {currentAudit.findings?.map((finding, idx) => (
-              <div key={idx} className="bg-slate-50 border border-slate-200 hover:border-brand-orange/60 rounded-2xl p-6 flex flex-col justify-between transition-all hover:shadow-md">
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <span className={`px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider ${
-                      finding.severity === 'High'
-                        ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                        : 'bg-amber-50 text-amber-700 border border-amber-200'
-                    }`}>
-                      {finding.severity} Severity
-                    </span>
-                    <span className="text-xs font-mono font-bold text-slate-500">{finding.source}</span>
+            {currentAudit.findings && currentAudit.findings.length > 0 ? (
+              currentAudit.findings.map((finding, idx) => (
+                <div key={idx} className="bg-slate-50 border border-slate-200 hover:border-brand-orange/60 rounded-2xl p-6 flex flex-col justify-between transition-all hover:shadow-md">
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">
+                        {finding.category || finding.type}
+                      </span>
+                      <span className="text-xs font-mono font-semibold text-slate-500">
+                        {finding.confidence || 90}% Confidence
+                      </span>
+                    </div>
+
+                    <p className="text-slate-800 text-sm mt-3 font-semibold">
+                      {finding.description}
+                    </p>
+
+                    {(finding.evidenceSnippet || finding.fullText) && (
+                      <div className="relative group bg-white border border-slate-200 rounded-xl p-3.5 mt-3 text-xs font-mono text-slate-600 break-all pr-12">
+                        <span>{finding.evidenceSnippet || finding.fullText}</span>
+                        
+                        {/* Gemini AI Sanitizer Button */}
+                        <button
+                          onClick={() => handleOpenSanitizer(finding)}
+                          title="Sanitize with AI (Anonymize identity markers)"
+                          className="absolute right-2 top-2 p-2 rounded-lg bg-orange-50 hover:bg-orange-100 border border-orange-200 transition-all text-brand-orange flex items-center justify-center shadow-xs hover:scale-105 cursor-pointer"
+                        >
+                          <GeminiSparkleIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
                   </div>
 
-                  <h4 className="text-lg font-extrabold text-slate-900 mt-3">{finding.type}</h4>
-                  <div className="text-xs font-mono text-brand-orange font-bold mt-1 bg-orange-50 px-3 py-1 rounded-md border border-orange-200 inline-block">
-                    {finding.value}
-                  </div>
-
-                  <p className="text-slate-600 text-xs mt-3 leading-relaxed font-medium">
-                    {finding.description}
-                  </p>
-
-                  <div className="mt-4 bg-white border border-slate-200 p-3 rounded-xl shadow-inner">
-                    <span className="text-[10px] font-mono font-bold uppercase text-slate-500 block mb-1">Evidence Snippet</span>
-                    <p className="text-xs text-slate-700 font-mono italic">"{finding.evidenceSnippet}"</p>
+                  <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between">
+                    <span className="text-xs text-slate-500 font-mono">Source: {finding.source}</span>
+                    {finding.evidence_url && (
+                      <a
+                        href={finding.evidence_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1"
+                      >
+                        <span>View Evidence</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
                   </div>
                 </div>
-
-                <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between">
-                  <span className="text-xs text-slate-500 font-medium">Confidence Score: <span className="text-slate-900 font-extrabold">{finding.confidence}%</span></span>
-                  {finding.evidence_url && (
-                    <a
-                      href={finding.evidence_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-xs font-bold text-brand-orange hover:text-brand-orange-hover flex items-center gap-1.5"
-                    >
-                      View Source
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                </div>
+              ))
+            ) : (
+              <div className="col-span-full bg-emerald-50/50 border border-emerald-200 rounded-2xl p-8 text-center">
+                <ShieldCheck className="w-12 h-12 text-emerald-600 mx-auto mb-3" />
+                <h4 className="text-lg font-extrabold text-emerald-900">Zero Critical Leaks Discovered</h4>
+                <p className="text-xs text-emerald-700 mt-1 font-medium max-w-md mx-auto">
+                  {selectedPlatform === 'github' 
+                    ? 'No high-risk secrets, locations, or personal emails were detected in your public GitHub profile.'
+                    : 'No direct location mentions, university tags, or exposed contact details were found in your public Reddit activity.'}
+                </p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </main>
+
+      {/* --- AI SANITIZER POPUP MODAL --- */}
+      {activeSanitizeModal && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative animate-fadeIn">
+            <button
+              onClick={() => setActiveSanitizeModal(false)}
+              className="absolute right-5 top-5 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center">
+                <GeminiSparkleIcon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-extrabold text-slate-900">AI Privacy Sanitizer</h3>
+                <p className="text-xs text-slate-500 font-medium">
+                  Anonymized re-frame to prevent stylometric & entity fingerprinting
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+                  Original Exposing Snippet
+                </label>
+                <div className="bg-rose-50/50 border border-rose-200 text-slate-800 p-3.5 rounded-xl font-mono text-xs break-all">
+                  {originalSnippet}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-emerald-700 mb-1.5 flex items-center justify-between">
+                  <span>Sanitized & Obfuscated Output</span>
+                  {sanitizedSnippet && (
+                    <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                      Safe to publish
+                    </span>
+                  )}
+                </label>
+                <div className="relative bg-slate-50 border border-emerald-300 text-slate-900 p-4 rounded-xl font-mono text-xs break-all min-h-[70px] flex items-center">
+                  {sanitizing ? (
+                    <div className="flex items-center gap-2 text-slate-500 text-xs">
+                      <div className="w-4 h-4 border-2 border-brand-orange border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sanitizing identifiers & stylometric markers...</span>
+                    </div>
+                  ) : (
+                    <span>{sanitizedSnippet}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <button
+                onClick={() => setActiveSanitizeModal(false)}
+                className="px-5 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-100 transition-all cursor-pointer"
+              >
+                Close
+              </button>
+              <button
+                onClick={handleCopySanitized}
+                disabled={sanitizing}
+                className="bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-extrabold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span>Copied Sanitized Text!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    <span>Copy Anonymized Text</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
   );
 }
+
