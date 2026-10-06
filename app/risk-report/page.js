@@ -548,6 +548,9 @@ export default function RiskReportPage() {
               <p className="text-slate-600 text-sm mt-1 font-medium">
                 Deterministic findings extracted strictly from {selectedPlatform === 'github' ? 'GitHub profile metadata and repos' : selectedPlatform === 'hackernews' ? 'Hacker News public stories and comments' : 'Reddit comment text and subreddits'}.
               </p>
+              {selectedPlatform === 'hackernews' && currentAudit.activitySummary && (
+                <p className="text-slate-500 text-xs mt-2 font-mono">{currentAudit.activitySummary}</p>
+              )}
             </div>
             
             <button
