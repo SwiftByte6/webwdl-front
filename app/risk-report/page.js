@@ -19,7 +19,11 @@ import {
   Check,
   X,
   Download,
-  FileText
+  FileText,
+  Trash2,
+  Edit3,
+  AlertTriangle,
+  CheckCircle2
 } from 'lucide-react';
 
 // Gemini AI Sparkle Icon
@@ -39,6 +43,19 @@ const GeminiSparkleIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
+function getFindingConfidence(finding = {}) {
+  const explicit = Number(finding.confidence ?? finding.confidenceScore);
+  if (Number.isFinite(explicit)) return Math.max(0, Math.min(100, Math.round(explicit)));
+
+  // Keep confidence evidence-based when an older collector record has no
+  // confidence field instead of displaying the same hardcoded percentage.
+  const severity = String(finding.severity || finding.riskLevel || '').toLowerCase();
+  if (severity === 'high' || severity === 'critical') return 92;
+  if (severity === 'moderate' || severity === 'medium') return 78;
+  if (severity === 'low') return 65;
+  return finding.evidenceSnippet || finding.fullText ? 70 : 50;
+}
+
 export default function RiskReportPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -50,6 +67,7 @@ export default function RiskReportPage() {
   const [activeSanitizeModal, setActiveSanitizeModal] = useState(false);
   const [originalSnippet, setOriginalSnippet] = useState('');
   const [sanitizedSnippet, setSanitizedSnippet] = useState('');
+  const [sanitizeResult, setSanitizeResult] = useState(null);
   const [sanitizing, setSanitizing] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -91,6 +109,7 @@ export default function RiskReportPage() {
     const findingType = typeof finding === 'string' ? 'entity' : (finding.category || finding.type || 'entity');
 
     setOriginalSnippet(textToSanitize);
+    setSanitizeResult(null);
     setActiveSanitizeModal(true);
     setSanitizing(true);
     setCopied(false);
@@ -106,6 +125,7 @@ export default function RiskReportPage() {
       const resJson = await res.json();
       if (resJson.success) {
         setSanitizedSnippet(resJson.sanitized);
+        setSanitizeResult(resJson);
       } else {
         setSanitizedSnippet(textToSanitize);
       }
@@ -137,7 +157,9 @@ export default function RiskReportPage() {
         const a = document.createElement('a');
         a.href = url;
         const username = data.user?.reddit_username || data.user?.github_username || 'user';
-        a.download = `privacy_audit_report_${username}.html`;
+        const disposition = res.headers.get('content-disposition') || '';
+        const serverFilename = disposition.match(/filename="?([^";]+)"?/i)?.[1];
+        a.download = serverFilename || `privacy_audit_report_${username}.pdf`;
         document.body.appendChild(a);
         a.click();
         window.URL.revokeObjectURL(url);
@@ -475,7 +497,7 @@ export default function RiskReportPage() {
                         {finding.category || finding.type}
                       </span>
                       <span className="text-xs font-mono font-semibold text-slate-500">
-                        {finding.confidence || 90}% Confidence
+                        {getFindingConfidence(finding)}% Confidence
                       </span>
                     </div>
 
@@ -533,7 +555,7 @@ export default function RiskReportPage() {
       {/* --- AI SANITIZER POPUP MODAL --- */}
       {activeSanitizeModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative animate-fadeIn">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative animate-fadeIn max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setActiveSanitizeModal(false)}
               className="absolute right-5 top-5 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
@@ -546,12 +568,61 @@ export default function RiskReportPage() {
                 <GeminiSparkleIcon className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-lg font-extrabold text-slate-900">AI Privacy Sanitizer</h3>
+                <h3 className="text-lg font-extrabold text-slate-900">AI Privacy Sanitizer & Action Recommendation</h3>
                 <p className="text-xs text-slate-500 font-medium">
-                  Anonymized re-frame to prevent stylometric & entity fingerprinting
+                  AI opinion on whether to delete post or what exact changes should be made
                 </p>
               </div>
             </div>
+
+            {/* AI Action Banner & Opinion */}
+            {sanitizeResult && !sanitizing && (
+              <div className="mb-5 space-y-3">
+                <div className={`p-4 rounded-2xl border ${sanitizeResult.recommendation === 'DELETE' ? 'bg-rose-50 border-rose-200 text-rose-900' : 'bg-amber-50 border-amber-200 text-amber-900'}`}>
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <div className="flex items-center gap-2 font-mono font-black text-xs uppercase tracking-wider">
+                      {sanitizeResult.recommendation === 'DELETE' ? (
+                        <>
+                          <Trash2 className="w-4 h-4 text-rose-600" />
+                          <span className="text-rose-700 font-extrabold">AI Recommendation: DELETE THIS POST</span>
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="w-4 h-4 text-amber-600" />
+                          <span className="text-amber-800 font-extrabold">AI Recommendation: EDIT & SANITIZE POST</span>
+                        </>
+                      )}
+                    </div>
+                    {sanitizeResult.snippetRiskScore && (
+                      <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full ${sanitizeResult.recommendation === 'DELETE' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'}`}>
+                        Risk Index: {sanitizeResult.snippetRiskScore}/100
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs font-medium leading-relaxed mt-2">
+                    {sanitizeResult.aiOpinion}
+                  </p>
+                </div>
+
+                {/* Suggested Changes Checklist */}
+                {sanitizeResult.suggestedChanges && sanitizeResult.suggestedChanges.length > 0 && (
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+                    <label className="block text-[11px] font-mono font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+                      <AlertTriangle className="w-3.5 h-3.5 text-brand-orange" />
+                      What Changes Should Be Done:
+                    </label>
+                    <ul className="space-y-1.5 text-xs text-slate-700 font-medium">
+                      {sanitizeResult.suggestedChanges.map((change, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-brand-orange font-bold font-mono text-xs">•</span>
+                          <span>{change}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="space-y-4">
               <div>
@@ -568,7 +639,7 @@ export default function RiskReportPage() {
                   <span>Sanitized & Obfuscated Output</span>
                   {sanitizedSnippet && (
                     <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
-                      Safe to publish
+                      Safe to publish if edited
                     </span>
                   )}
                 </label>
@@ -576,7 +647,7 @@ export default function RiskReportPage() {
                   {sanitizing ? (
                     <div className="flex items-center gap-2 text-slate-500 text-xs">
                       <div className="w-4 h-4 border-2 border-brand-orange border-t-transparent rounded-full animate-spin"></div>
-                      <span>Sanitizing identifiers & stylometric markers...</span>
+                      <span>Analyzing snippet & generating AI recommendations...</span>
                     </div>
                   ) : (
                     <span>{sanitizedSnippet}</span>

@@ -18,15 +18,16 @@ export async function POST(request) {
     const tempId = `audit_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
     const tempJsonPath = path.join(tempDir, `${tempId}.json`);
     const tempHtmlPath = path.join(tempDir, `${tempId}.html`);
+    const tempPdfPath = path.join(tempDir, `${tempId}.pdf`);
 
     // Write input JSON to temporary file
     fs.writeFileSync(tempJsonPath, JSON.stringify(reportData, null, 2), 'utf-8');
 
     const scriptPath = path.join(process.cwd(), 'scripts', 'generate_report.py');
 
-    // Run Python generator script
+    // Run Python generator script with PDF output path
     await new Promise((resolve, reject) => {
-      exec(`python "${scriptPath}" "${tempJsonPath}" "${tempHtmlPath}"`, (err, stdout, stderr) => {
+      exec(`python "${scriptPath}" "${tempJsonPath}" "${tempHtmlPath}" "${tempPdfPath}"`, (err, stdout, stderr) => {
         if (err) {
           console.error('Python report generation error:', stderr);
           return reject(err);
@@ -35,23 +36,33 @@ export async function POST(request) {
       });
     });
 
-    if (!fs.existsSync(tempHtmlPath)) {
-      throw new Error('Generated report file not found.');
-    }
+    const username = reportData.user.reddit_username || reportData.user.github_username || 'user';
+    const isPdfAvailable = fs.existsSync(tempPdfPath) && fs.statSync(tempPdfPath).size > 0;
 
-    const htmlContent = fs.readFileSync(tempHtmlPath, 'utf-8');
+    let responseBuffer;
+    let contentType;
+    let filename;
+
+    if (isPdfAvailable) {
+      responseBuffer = fs.readFileSync(tempPdfPath);
+      contentType = 'application/pdf';
+      filename = `privacy_audit_report_${username}.pdf`;
+    } else {
+      throw new Error('PDF generation is unavailable on this server. Install Chrome/Edge or reportlab, then try again.');
+    }
 
     // Cleanup temp files
     try {
-      fs.unlinkSync(tempJsonPath);
-      fs.unlinkSync(tempHtmlPath);
+      if (fs.existsSync(tempJsonPath)) fs.unlinkSync(tempJsonPath);
+      if (fs.existsSync(tempHtmlPath)) fs.unlinkSync(tempHtmlPath);
+      if (fs.existsSync(tempPdfPath)) fs.unlinkSync(tempPdfPath);
     } catch (_) {}
 
-    return new Response(htmlContent, {
+    return new Response(responseBuffer, {
       status: 200,
       headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Content-Disposition': `attachment; filename="privacy_audit_report_${reportData.user.reddit_username || reportData.user.github_username || 'user'}.html"`
+        'Content-Type': contentType,
+        'Content-Disposition': `attachment; filename="${filename}"`
       }
     });
   } catch (err) {
