@@ -14,6 +14,7 @@ export default function LoginPage() {
 
   const [githubUsername, setGithubUsername] = useState('');
   const [redditUsername, setRedditUsername] = useState('');
+  const [hackernewsUsername, setHackernewsUsername] = useState('');
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ export default function LoginPage() {
         setUser(data.user);
         setGithubUsername(data.user.github_username || '');
         setRedditUsername(data.user.reddit_username || '');
+        setHackernewsUsername(data.user.hackernews_username || '');
       } else {
         setUser(null);
       }
@@ -42,7 +44,7 @@ export default function LoginPage() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    if (!githubUsername.trim() && !redditUsername.trim()) {
+    if (!githubUsername.trim() && !redditUsername.trim() && !hackernewsUsername.trim()) {
       setError('Please enter a Reddit or GitHub handle.');
       return;
     }
@@ -56,6 +58,7 @@ export default function LoginPage() {
           action: 'login',
           github_username: githubUsername.trim(),
           reddit_username: redditUsername.trim()
+          ,hackernews_username: hackernewsUsername.trim()
         })
       });
       const data = await res.json();
@@ -87,6 +90,7 @@ export default function LoginPage() {
         setUser(null);
         setGithubUsername('');
         setRedditUsername('');
+        setHackernewsUsername('');
         window.location.href = '/login';
       }
     } catch (err) {
@@ -213,6 +217,22 @@ export default function LoginPage() {
                       value={githubUsername}
                       onChange={(e) => setGithubUsername(e.target.value)}
                       placeholder="e.g. octocat or your GitHub handle"
+                      className="w-full py-3.5 pl-9 pr-4 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 font-mono font-semibold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Hacker News Handle (Optional)
+                  </label>
+                  <div className="relative flex items-center">
+                    <span className="absolute left-4 text-slate-400 font-mono text-sm">@</span>
+                    <input
+                      type="text"
+                      value={hackernewsUsername}
+                      onChange={(e) => setHackernewsUsername(e.target.value)}
+                      placeholder="e.g. dang"
                       className="w-full py-3.5 pl-9 pr-4 text-sm bg-slate-50 border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 font-mono font-semibold"
                     />
                   </div>

@@ -61,7 +61,8 @@ export default function RiskReportPage() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  const [selectedPlatform, setSelectedPlatform] = useState('reddit'); // 'github' | 'reddit'
+  const [selectedPlatform, setSelectedPlatform] = useState('reddit'); // 'github' | 'reddit' | 'hackernews'
+  const [hackerNewsHandle, setHackerNewsHandle] = useState('');
 
   // AI Remediation Modal State
   const [activeSanitizeModal, setActiveSanitizeModal] = useState(false);
@@ -71,11 +72,14 @@ export default function RiskReportPage() {
   const [sanitizing, setSanitizing] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const fetchAuditData = async (forceRefresh = false) => {
+  const fetchAuditData = async (forceRefresh = false, handleOverride = '') => {
     if (forceRefresh) setRefreshing(true);
     else setLoading(true);
     try {
-      const url = forceRefresh ? '/api/audit?refresh=true' : '/api/audit';
+      const params = new URLSearchParams();
+      if (forceRefresh) params.set('refresh', 'true');
+      if (handleOverride.trim()) params.set('hn', handleOverride.trim());
+      const url = `/api/audit${params.toString() ? `?${params}` : ''}`;
       const res = await fetch(url);
       if (res.status === 401) {
         setData({ unauthenticated: true });
@@ -140,6 +144,15 @@ export default function RiskReportPage() {
     navigator.clipboard.writeText(sanitizedSnippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePlatformAccount = async (action) => {
+    const platform = selectedPlatform;
+    const label = platform === 'github' ? 'GitHub' : platform === 'reddit' ? 'Reddit' : 'Hacker News';
+    const username = action === 'disconnect' ? '' : window.prompt(`Enter new ${label} username`, connectionStatus?.[platform]?.username || '');
+    if (action === 'update_platform' && !username?.trim()) return;
+    const res = await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action, platform, username: username?.trim() || '' }) });
+    if (res.ok) fetchAuditData(false);
   };
 
   const handleDownloadReport = async () => {
@@ -217,8 +230,8 @@ export default function RiskReportPage() {
     );
   }
 
-  const { user, connectionStatus, githubAudit, redditAudit } = data;
-  const currentAudit = selectedPlatform === 'github' ? (githubAudit || {}) : (redditAudit || {});
+  const { user, connectionStatus, githubAudit, redditAudit, hackernewsAudit } = data;
+  const currentAudit = selectedPlatform === 'github' ? (githubAudit || {}) : selectedPlatform === 'hackernews' ? (hackernewsAudit || {}) : (redditAudit || {});
   const isPlatformConnected = Boolean(connectionStatus?.[selectedPlatform]?.connected);
   const exposureLevel = currentAudit.exposureLevel || (
     !isPlatformConnected ? null : currentAudit.score >= 80 ? 'High' : currentAudit.score >= 50 ? 'Moderate' : 'Low'
@@ -295,7 +308,6 @@ export default function RiskReportPage() {
               )}
               <span>{downloading ? 'Generating Report...' : 'Download Report'}</span>
             </button>
-
             <button
               onClick={() => fetchAuditData(true)}
               disabled={refreshing}
@@ -308,11 +320,11 @@ export default function RiskReportPage() {
         </div>
 
         {/* --- INDEPENDENT PLATFORM SELECTOR TABS --- */}
-        <div className="flex justify-center">
-          <div className="bg-slate-200/80 p-1.5 rounded-full border border-slate-300 inline-flex items-center gap-2 shadow-inner">
+        <div className="flex justify-center max-w-full overflow-x-auto pb-1">
+          <div className="bg-slate-200/80 p-1.5 rounded-full border border-slate-300 inline-flex flex-nowrap items-center gap-2 shadow-inner min-w-max">
             <button
               onClick={() => setSelectedPlatform('github')}
-              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
+              className={`shrink-0 px-4 sm:px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
                 selectedPlatform === 'github'
                   ? 'bg-slate-900 text-white shadow-md'
                   : 'text-slate-700 hover:text-slate-900'
@@ -329,7 +341,7 @@ export default function RiskReportPage() {
 
             <button
               onClick={() => setSelectedPlatform('reddit')}
-              className={`px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
+              className={`shrink-0 px-4 sm:px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${
                 selectedPlatform === 'reddit'
                   ? 'bg-brand-orange text-white shadow-glow font-black'
                   : 'text-slate-700 hover:text-slate-900'
@@ -344,6 +356,14 @@ export default function RiskReportPage() {
                   u/{connectionStatus.reddit.username}
                 </span>
               )}
+            </button>
+            <button
+              onClick={() => setSelectedPlatform('hackernews')}
+              className={`shrink-0 px-4 sm:px-8 py-3.5 rounded-full text-sm font-extrabold transition-all flex items-center gap-2.5 cursor-pointer ${selectedPlatform === 'hackernews' ? 'bg-orange-600 text-white shadow-md' : 'text-slate-700 hover:text-slate-900'}`}
+            >
+              <span className="w-5 h-5 rounded bg-orange-500 text-white text-[10px] font-black flex items-center justify-center">Y</span>
+              <span>Hacker News</span>
+              {connectionStatus?.hackernews?.connected && <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-orange-700 text-white">{connectionStatus.hackernews.username}</span>}
             </button>
           </div>
         </div>
@@ -365,6 +385,26 @@ export default function RiskReportPage() {
           </div>
         )}
 
+        {selectedPlatform === 'hackernews' && !connectionStatus?.hackernews?.connected && (
+          <div className="bg-slate-900 rounded-3xl p-8 text-center shadow-lg">
+            <div className="w-10 h-10 rounded-xl bg-orange-500 text-white text-xl font-black flex items-center justify-center mx-auto mb-3">Y</div>
+            <h3 className="text-xl font-extrabold text-white">Add your Hacker News username</h3>
+            <p className="text-sm text-slate-300 mt-2">Hacker News uses public profile data, so no password or OAuth is required.</p>
+            <form onSubmit={(event) => { event.preventDefault(); if (hackerNewsHandle.trim()) fetchAuditData(false, hackerNewsHandle); }} className="flex max-w-md mx-auto mt-5 gap-2">
+              <input value={hackerNewsHandle} onChange={(event) => setHackerNewsHandle(event.target.value)} placeholder="e.g. dang" className="flex-1 rounded-full px-4 py-3 text-sm text-slate-900" />
+              <button className="px-5 py-3 rounded-full bg-orange-500 text-white font-extrabold text-sm">Analyze</button>
+            </form>
+          </div>
+        )}
+
+        {connectionStatus?.[selectedPlatform]?.connected && (
+          <div className="flex justify-center gap-2 -mt-4">
+            <button onClick={() => handlePlatformAccount('update_platform')} className="text-xs font-bold text-slate-600 hover:text-brand-orange underline">Edit {selectedPlatform === 'hackernews' ? 'Hacker News' : selectedPlatform} username</button>
+            <span className="text-slate-300">|</span>
+            <button onClick={() => handlePlatformAccount('disconnect')} className="text-xs font-bold text-rose-600 hover:text-rose-800 underline">Disconnect only {selectedPlatform === 'hackernews' ? 'Hacker News' : selectedPlatform}</button>
+          </div>
+        )}
+
         {/* --- PLATFORM SPECIFIC AUDIT SCORE & PREDICTIONS --- */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
@@ -383,7 +423,7 @@ export default function RiskReportPage() {
                     <svg className="w-8 h-8 fill-current text-orange-600" viewBox="0 0 24 24">
                       <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701z" />
                     </svg>
-                    Reddit Platform Audit
+                    {selectedPlatform === 'hackernews' ? 'Hacker News Platform Audit' : 'Reddit Platform Audit'}
                   </>
                 )}
               </h2>
@@ -433,7 +473,7 @@ export default function RiskReportPage() {
                 {currentAudit.predictedState || 'None Disclosed'}
               </div>
               <p className="text-xs text-slate-500 mt-2 font-medium">
-                Derived strictly from {selectedPlatform === 'github' ? 'GitHub profile location metadata' : 'Reddit comment text mentions & subreddits'}.
+                Derived strictly from {selectedPlatform === 'github' ? 'GitHub profile location metadata' : selectedPlatform === 'hackernews' ? 'Hacker News public stories and comments' : 'Reddit comment text mentions & subreddits'}.
               </p>
             </div>
 
@@ -455,6 +495,11 @@ export default function RiskReportPage() {
                     <span className="text-xs text-slate-500 italic">No public repositories</span>
                   )}
                 </div>
+              </div>
+            ) : currentAudit.itemCount === 0 ? (
+              <div className="md:col-span-2 bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center">
+                <h4 className="text-lg font-extrabold text-slate-900">No public Hacker News activity found</h4>
+                <p className="text-sm text-slate-500 mt-2">Check the username spelling. Hacker News usernames are case-sensitive and only public submissions can be analyzed.</p>
               </div>
             ) : (
               <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
@@ -498,10 +543,10 @@ export default function RiskReportPage() {
             <div>
               <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
                 <ShieldAlert className="w-6 h-6 text-rose-600" />
-                {selectedPlatform === 'github' ? 'GitHub Specific Leaks' : 'Reddit Specific Leaks'}
+                {selectedPlatform === 'github' ? 'GitHub Specific Leaks' : selectedPlatform === 'hackernews' ? 'Hacker News Specific Leaks' : 'Reddit Specific Leaks'}
               </h3>
               <p className="text-slate-600 text-sm mt-1 font-medium">
-                Deterministic findings extracted strictly from {selectedPlatform === 'github' ? 'GitHub profile metadata and repos' : 'Reddit comment text and subreddits'}.
+                Deterministic findings extracted strictly from {selectedPlatform === 'github' ? 'GitHub profile metadata and repos' : selectedPlatform === 'hackernews' ? 'Hacker News public stories and comments' : 'Reddit comment text and subreddits'}.
               </p>
             </div>
             

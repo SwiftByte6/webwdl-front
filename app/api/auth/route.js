@@ -25,17 +25,34 @@ export async function POST(request) {
       });
     }
 
+    if (action === 'disconnect' || action === 'update_platform') {
+      const current = getCurrentUser();
+      if (!current) return Response.json({ success: false, error: 'No active session.' }, { status: 401 });
+      const platform = body.platform;
+      if (!['github', 'reddit', 'hackernews'].includes(platform)) return Response.json({ success: false, error: 'Unsupported platform.' }, { status: 400 });
+      const value = action === 'disconnect' ? '' : String(body.username || '').trim();
+      const handles = {
+        github: current.github_username || '',
+        reddit: current.reddit_username || '',
+        hackernews: current.hackernews_username || ''
+      };
+      handles[platform] = value;
+      const user = updateUserHandles(current.id, handles.github, handles.reddit, handles.hackernews);
+      return Response.json({ success: true, authenticated: true, user });
+    }
+
     const githubUsername = (body.github_username || '').trim();
     const redditUsername = (body.reddit_username || '').trim();
+    const hackernewsUsername = (body.hackernews_username || '').trim();
 
-    if (!githubUsername && !redditUsername) {
+    if (!githubUsername && !redditUsername && !hackernewsUsername) {
       return Response.json({
         success: false,
         error: 'Please enter a GitHub or Reddit handle.'
       }, { status: 400 });
     }
 
-    const user = updateUserHandles('usr_current', githubUsername, redditUsername);
+    const user = updateUserHandles('usr_current', githubUsername, redditUsername, hackernewsUsername);
 
     return Response.json({
       success: true,
