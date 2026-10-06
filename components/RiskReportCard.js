@@ -234,8 +234,15 @@ export default function RiskReportCard() {
     if (!customText && (!customHandleA || !customHandleB)) return;
     setIsAnalyzing(true);
     setTimeout(() => {
-      const len = (customText.length + customHandleA.length + customHandleB.length) % 100;
-      const score = Math.max(22, Math.min(85, 30 + (len % 55)));
+      const combinedInput = `${customText} ${customHandleA} ${customHandleB}`.toLowerCase();
+      const riskSignals = [
+        /@|email|mail|contact/.test(combinedInput),
+        /github|reddit|blog|website|profile/.test(combinedInput),
+        /city|india|mumbai|delhi|location|college|company/.test(combinedInput),
+        /same|match|identical|shared|overlap|link/.test(combinedInput),
+      ].filter(Boolean).length;
+      const evidenceLength = Math.min(25, Math.floor(combinedInput.length / 24));
+      const score = Math.max(12, Math.min(100, 22 + riskSignals * 14 + evidenceLength));
       
       let status = 'low';
       let statusText = 'Low Linkability Risk';

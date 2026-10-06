@@ -219,6 +219,15 @@ export default function RiskReportPage() {
 
   const { user, connectionStatus, githubAudit, redditAudit } = data;
   const currentAudit = selectedPlatform === 'github' ? (githubAudit || {}) : (redditAudit || {});
+  const isPlatformConnected = Boolean(connectionStatus?.[selectedPlatform]?.connected);
+  const exposureLevel = currentAudit.exposureLevel || (
+    !isPlatformConnected ? null : currentAudit.score >= 80 ? 'High' : currentAudit.score >= 50 ? 'Moderate' : 'Low'
+  );
+  const confidenceScore = Number.isFinite(Number(currentAudit.confidenceScore))
+    ? Math.round(Number(currentAudit.confidenceScore))
+    : (currentAudit.findings?.length
+      ? Math.round(currentAudit.findings.reduce((sum, finding) => sum + getFindingConfidence(finding), 0) / currentAudit.findings.length)
+      : 0);
   const activeAvatar = user.avatar_url || (user.reddit_username ? 'https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png' : `https://github.com/${user.github_username}.png`);
 
   return (
@@ -339,6 +348,23 @@ export default function RiskReportPage() {
           </div>
         </div>
 
+        {selectedPlatform === 'github' && !connectionStatus?.github?.connected && (
+          <div className="bg-slate-900 rounded-3xl p-8 text-center shadow-lg">
+            <GithubIcon className="w-10 h-10 fill-current text-white mx-auto mb-3" />
+            <h3 className="text-xl font-extrabold text-white">Connect GitHub to run this audit</h3>
+            <p className="text-sm text-slate-300 mt-2 max-w-xl mx-auto">
+              GitHub is independent from Reddit. You can connect it now without signing out or replacing your Reddit connection.
+            </p>
+            <a
+              href="/api/auth/github?returnTo=%2Frisk-report"
+              className="inline-flex items-center gap-2 mt-5 px-6 py-3 rounded-full bg-white text-slate-900 font-extrabold text-sm hover:bg-orange-50 transition-colors"
+            >
+              <GithubIcon className="w-5 h-5 fill-current" />
+              Connect GitHub
+            </a>
+          </div>
+        )}
+
         {/* --- PLATFORM SPECIFIC AUDIT SCORE & PREDICTIONS --- */}
         <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
@@ -367,26 +393,29 @@ export default function RiskReportPage() {
               <div className="text-right">
                 <div className="text-xs font-mono font-bold text-slate-500 uppercase">Information Exposure</div>
                 <div className="mt-1">
-                  {currentAudit.exposureLevel === 'High' ? (
+                  {exposureLevel === 'High' ? (
                     <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-rose-100 text-rose-800 border border-rose-300 shadow-xs">
                       <span className="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
                       High Exposure
                     </span>
-                  ) : currentAudit.exposureLevel === 'Moderate' ? (
+                  ) : exposureLevel === 'Moderate' ? (
                     <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-amber-100 text-amber-800 border border-amber-300 shadow-xs">
                       <span className="w-2 h-2 rounded-full bg-amber-600"></span>
                       Moderate Exposure
                     </span>
-                  ) : currentAudit.exposureLevel === 'Low' ? (
+                  ) : exposureLevel === 'Low' ? (
                     <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase font-mono bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-xs">
                       <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
                       Low Exposure
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase font-mono bg-slate-100 text-slate-600 border border-slate-300">
-                      Not Linked
+                      {isPlatformConnected ? 'No Exposure Detected' : 'Not Linked'}
                     </span>
                   )}
+                </div>
+                <div className="mt-2 text-[11px] font-mono font-bold text-slate-500">
+                  {confidenceScore}% Confidence
                 </div>
               </div>
             </div>
