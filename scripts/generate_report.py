@@ -30,6 +30,7 @@ def generate_html_report(data_json_path, output_path):
     user = data.get('user', {})
     reddit_audit = data.get('redditAudit', {})
     github_audit = data.get('githubAudit', {})
+    hackernews_audit = data.get('hackernewsAudit', {})
     conn = data.get('connectionStatus', {})
 
     username = user.get('reddit_username') or user.get('github_username') or user.get('name') or 'Anonymous User'
@@ -38,8 +39,9 @@ def generate_html_report(data_json_path, output_path):
     # Overall score calculation
     r_score = reddit_audit.get('score', 0) if conn.get('reddit', {}).get('connected') else None
     g_score = github_audit.get('score', 0) if conn.get('github', {}).get('connected') else None
+    h_score = hackernews_audit.get('score', 0) if conn.get('hackernews', {}).get('connected') else None
     
-    scores = [s for s in [r_score, g_score] if s is not None]
+    scores = [s for s in [r_score, g_score, h_score] if s is not None]
     overall_score = round(sum(scores) / len(scores)) if scores else 50
     risk_level = "CRITICAL RISK" if overall_score >= 80 else "MODERATE RISK" if overall_score >= 50 else "LOW RISK"
     risk_color = "#e11d48" if overall_score >= 80 else "#f59e0b" if overall_score >= 50 else "#10b981"
@@ -53,6 +55,10 @@ def generate_html_report(data_json_path, output_path):
     if conn.get('github', {}).get('connected'):
         for f in github_audit.get('findings', []):
             f['platform_tag'] = 'GitHub'
+            all_findings.append(f)
+    if conn.get('hackernews', {}).get('connected'):
+        for f in hackernews_audit.get('findings', []):
+            f['platform_tag'] = 'Hacker News'
             all_findings.append(f)
 
     findings_html = ""
@@ -457,7 +463,7 @@ def generate_html_report(data_json_path, output_path):
         <div class="score-banner">
             <div class="user-info">
                 <h2>{user.get('name', username)}</h2>
-                <p>Reddit: {f"u/{user.get('reddit_username')}" if user.get('reddit_username') else 'None linked'} | GitHub: {f"@{user.get('github_username')}" if user.get('github_username') else 'None linked'}</p>
+                <p>Reddit: {f"u/{user.get('reddit_username')}" if user.get('reddit_username') else 'None linked'} | GitHub: {f"@{user.get('github_username')}" if user.get('github_username') else 'None linked'} | Hacker News: {user.get('hackernews_username') or 'None linked'}</p>
             </div>
             <div class="stat-card">
                 <div class="stat-val" style="color: {risk_color};">{overall_score} / 100</div>
@@ -509,6 +515,12 @@ def generate_html_report(data_json_path, output_path):
                     <span class="info-lbl">Languages Discovered:</span>
                     <span class="info-val">{", ".join(github_audit.get('languages', ['None']))}</span>
                 </div>
+            </div>
+            <div class="info-panel">
+                <h4>Hacker News Discussion Footprint</h4>
+                <div class="info-row"><span class="info-lbl">Connected Username:</span><span class="info-val">{hackernews_audit.get('username', 'Unlinked') if conn.get('hackernews', {}).get('connected') else 'Unlinked'}</span></div>
+                <div class="info-row"><span class="info-lbl">Predicted Region:</span><span class="info-val">{hackernews_audit.get('predictedState', 'Undisclosed')}</span></div>
+                <div class="info-row"><span class="info-lbl">Scanned Activity Items:</span><span class="info-val">{hackernews_audit.get('itemCount', 0)} stories/comments</span></div>
             </div>
         </div>
 
